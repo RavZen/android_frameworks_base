@@ -5534,6 +5534,12 @@ public final class Settings {
         public static final String RETICKER_STATUS = "reticker_status";
 
         /**
+         * Show the pending notification counts as overlays on the status bar
+         * @hide
+         */
+        public static final String STATUSBAR_NOTIF_COUNT = "statusbar_notif_count";
+
+        /**
          * reTicker Colored
          * @hide
          */
