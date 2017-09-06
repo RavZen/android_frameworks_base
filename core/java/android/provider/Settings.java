@@ -5494,6 +5494,12 @@ public final class Settings {
         public static final String ALERT_SLIDER_ORDER = "alert_slider_order";
 
         /**
+         * Whether to show QS panel footer warnings like for active VPN
+         * @hide
+         */
+        public static final String QS_FOOTER_WARNINGS = "qs_footer_warnings";
+
+        /**
          * These are all public system settings
          *
          * @hide
