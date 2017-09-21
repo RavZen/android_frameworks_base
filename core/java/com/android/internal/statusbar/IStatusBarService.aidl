@@ -173,4 +173,9 @@ interface IStatusBarService
      */
     void setBlockedGesturalNavigation(boolean blocked);
     void killForegroundApp();
+
+    void toggleRecentApps();
+    void toggleSplitScreen();
+    void preloadRecentApps();
+    void cancelPreloadRecentApps();
 }
