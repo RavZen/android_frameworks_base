@@ -5658,6 +5658,13 @@ public final class Settings {
         @Readable
         public static final String RETICKER_STATUS = "reticker_status";
 
+
+        /**
+         * Whether to display cross sign for a data disabled connection
+         * @hide
+         */
+        public static final String DATA_DISABLED_ICON = "data_disabled_icon";
+
         /**
          * Show the pending notification counts as overlays on the status bar
          * @hide
