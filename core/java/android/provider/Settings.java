@@ -5507,6 +5507,13 @@ public final class Settings {
         public static final String AUTO_BRIGHTNESS_ONE_SHOT = "auto_brightness_one_shot";
 
         /**
+         * Controls whether to show notification headers
+         * @hide
+         */
+        @Readable
+        public static final String NOTIFICATION_HEADERS = "notification_headers";
+
+        /**
          * These are all public system settings
          *
          * @hide

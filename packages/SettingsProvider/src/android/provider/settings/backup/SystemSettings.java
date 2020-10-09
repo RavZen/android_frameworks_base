@@ -91,5 +91,6 @@ public class SystemSettings {
         Settings.System.LOCKSCREEN_BATTERY_INFO,
         Settings.System.ENABLE_RIPPLE_EFFECT,
         Settings.System.DOZE_ON_CHARGE,
+        Settings.System.NOTIFICATION_HEADERS,
     };
 }
