@@ -184,6 +184,8 @@ public class NavigationBarView extends FrameLayout implements
 
     private ViewGroup mNavigationBarContents;
 
+    private boolean mHomeHandleForceHidden;
+
     private boolean mBlockedGesturalNavigation;
 
     private class NavTransitionListener implements TransitionListener {
@@ -804,8 +806,20 @@ public class NavigationBarView extends FrameLayout implements
         getBackButton().setVisibility(disableBack       ? View.INVISIBLE : View.VISIBLE);
         getHomeButton().setVisibility(disableHome       ? View.INVISIBLE : View.VISIBLE);
         getRecentsButton().setVisibility(disableRecent  ? View.INVISIBLE : View.VISIBLE);
-        getHomeHandle().setVisibility(disableHomeHandle ? View.INVISIBLE : View.VISIBLE);
+        getHomeHandle().setVisibility(disableHomeHandle || mHomeHandleForceHidden ? View.INVISIBLE : View.VISIBLE);
         notifyActiveTouchRegions();
+    }
+
+    public void hideHomeHandle(boolean hide) {
+        mHomeHandleForceHidden = hide;
+        boolean disableRecent = isRecentsButtonDisabled() | !QuickStepContract.isLegacyMode(mNavBarMode);
+        boolean disableHomeHandle = disableRecent
+                && ((mDisabledFlags & View.STATUS_BAR_DISABLE_HOME) != 0);
+        getHomeHandle().setVisibility(disableHomeHandle || hide ? View.INVISIBLE : View.VISIBLE);
+    }
+
+    public boolean isHomeHandleForceHidden() {
+        return mHomeHandleForceHidden;
     }
 
     @VisibleForTesting
@@ -1168,6 +1182,10 @@ public class NavigationBarView extends FrameLayout implements
 
     public boolean isVertical() {
         return mIsVertical;
+    }
+
+    public NavigationBarFrame getNavbarFrame() {
+        return ((NavigationBarFrame) getRootView());
     }
 
     public void reorient() {
