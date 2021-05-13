@@ -5500,6 +5500,13 @@ public final class Settings {
         public static final String QS_FOOTER_WARNINGS = "qs_footer_warnings";
 
         /**
+         * Whether auto brightness is applied one shot when screen is turned on.
+         * Default 0
+         * @hide
+         */
+        public static final String AUTO_BRIGHTNESS_ONE_SHOT = "auto_brightness_one_shot";
+
+        /**
          * These are all public system settings
          *
          * @hide
