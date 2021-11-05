@@ -44,4 +44,12 @@
 
     <!-- FPS measure interval in milliseconds, default 1000 -->
     <integer name="config_fpsReadInterval">1000</integer>
+
+    <!-- Icons that don't show in a collapsed non-keyguard statusbar -->
+    <string-array name="config_collapsed_statusbar_icon_blocklist" translatable="false">
+    </string-array>
+
+    <!-- Icons that don't show in a collapsed statusbar on keyguard -->
+    <string-array name="config_keyguard_statusbar_icon_blocklist" translatable="false">
+    </string-array>
 </resources>
