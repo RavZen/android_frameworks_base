@@ -784,7 +784,7 @@ public class UdfpsController implements DozeReceiver {
 
         if (mUdfpsAnimation != null) {
             mUdfpsAnimation.setIsKeyguard(reason ==
-                    IUdfpsOverlayController.REASON_AUTH_FPM_KEYGUARD);
+                    BiometricOverlayConstants.REASON_AUTH_KEYGUARD);
         }
 
         if (mView == null) {
