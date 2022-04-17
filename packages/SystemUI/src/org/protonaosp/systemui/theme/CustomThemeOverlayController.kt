@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.superior.android.systemui.theme
+package org.protonaosp.systemui.theme
 
 import android.annotation.ColorInt
 import android.app.WallpaperColors
@@ -67,7 +67,7 @@ import kotlin.math.log10
 import kotlin.math.pow
 
 @SysUISingleton
-class SuperiorThemeOverlayController @Inject constructor(
+class CustomThemeOverlayController @Inject constructor(
     private val context: Context,
     broadcastDispatcher: BroadcastDispatcher,
     @Background bgHandler: Handler,
@@ -240,7 +240,7 @@ class SuperiorThemeOverlayController @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "SuperiorThemeOverlayController"
+        private const val TAG = "CustomThemeOverlayController"
         private const val DEBUG = false
 
         private const val WHITE_LUMINANCE_MIN = 1.0
