@@ -92,5 +92,12 @@ public class SystemSettings {
         Settings.System.ENABLE_RIPPLE_EFFECT,
         Settings.System.DOZE_ON_CHARGE,
         Settings.System.NOTIFICATION_HEADERS,
+        Settings.System.SMART_CHARGING,
+        Settings.System.SMART_CHARGING_LEVEL,
+        Settings.System.SMART_CHARGING_RESUME_LEVEL,
+        Settings.System.SMART_CHARGING_RESET_STATS,
+        Settings.System.SMART_CUTOFF,
+        Settings.System.SMART_CUTOFF_TEMPERATURE,
+        Settings.System.SMART_CUTOFF_RESUME_TEMPERATURE,
     };
 }
