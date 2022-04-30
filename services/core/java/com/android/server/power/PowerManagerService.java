@@ -62,7 +62,6 @@ import android.os.BatteryManager;
 import android.os.BatteryManagerInternal;
 import android.os.BatterySaverPolicyConfig;
 import android.os.Binder;
-import android.os.FileUtils;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.IPowerManager;
@@ -131,7 +130,6 @@ import com.android.server.power.batterysaver.BatterySaverStateMachine;
 import com.android.server.power.batterysaver.BatterySavingStats;
 
 import java.io.FileDescriptor;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -277,10 +275,6 @@ public final class PowerManagerService extends SystemService
 
     private static final float PROXIMITY_NEAR_THRESHOLD = 5.0f;
 
-    // Smart charging: sysfs node of charger
-    private static final String POWER_INTPUT_SUSPEND_NODE =
-            "/sys/class/power_supply/battery/input_suspend";
-
     private final Context mContext;
     private final ServiceThread mHandlerThread;
     private final Handler mHandler;
@@ -409,9 +403,6 @@ public final class PowerManagerService extends SystemService
 
     // The current battery level percentage.
     private int mBatteryLevel;
-
-    // The current battery Temperature
-    private int mBatteryTemperature;
 
     /**
      * The lock that should be held when interacting with {@link #mEnhancedDischargeTimeElapsed},
@@ -736,25 +727,6 @@ public final class PowerManagerService extends SystemService
             mLastUserActivityTime = now;
         }
     }
-
-    // Smart charging
-    private boolean mSmartChargingEnabled;
-    private boolean mSmartChargingResetStats;
-    private boolean mPowerInputSuspended = false;
-    private int mSmartChargingLevel;
-    private int mSmartChargingResumeLevel;
-    private int mSmartChargingLevelDefaultConfig;
-    private int mSmartChargingResumeLevelDefaultConfig;
-    private static String mPowerInputSuspendSysfsNode;
-    private static String mPowerInputSuspendValue;
-    private static String mPowerInputResumeValue;
-
-    // Smart Cutoff
-    private boolean mSmartCutoffEnabled;
-    private int mSmartCutoffResumeTemperature;
-    private int mSmartCutoffTemperature;
-    private int mSmartCutoffTemperatureDefaultConfig;
-    private int mSmartCutoffResumeTemperatureConfig;
 
     /**
      * All times are in milliseconds. These constants are kept synchronized with the system
@@ -1283,27 +1255,6 @@ public final class PowerManagerService extends SystemService
         resolver.registerContentObserver(Settings.System.getUriFor(
                 Settings.System.PROXIMITY_ON_WAKE),
                 false, mSettingsObserver, UserHandle.USER_ALL);
-        resolver.registerContentObserver(Settings.System.getUriFor(
-                Settings.System.SMART_CHARGING),
-                false, mSettingsObserver, UserHandle.USER_ALL);
-        resolver.registerContentObserver(Settings.System.getUriFor(
-                Settings.System.SMART_CHARGING_LEVEL),
-                false, mSettingsObserver, UserHandle.USER_ALL);
-        resolver.registerContentObserver(Settings.System.getUriFor(
-                Settings.System.SMART_CHARGING_RESUME_LEVEL),
-                false, mSettingsObserver, UserHandle.USER_ALL);
-        resolver.registerContentObserver(Settings.System.getUriFor(
-                Settings.System.SMART_CHARGING_RESET_STATS),
-                false, mSettingsObserver, UserHandle.USER_ALL);
-        resolver.registerContentObserver(Settings.System.getUriFor(
-                Settings.System.SMART_CUTOFF),
-                false, mSettingsObserver, UserHandle.USER_ALL);
-        resolver.registerContentObserver(Settings.System.getUriFor(
-                Settings.System.SMART_CUTOFF_TEMPERATURE),
-                false, mSettingsObserver, UserHandle.USER_ALL);
-        resolver.registerContentObserver(Settings.System.getUriFor(
-                Settings.System.SMART_CUTOFF_RESUME_TEMPERATURE),
-                false, mSettingsObserver, UserHandle.USER_ALL);
 
         IVrManager vrManager = IVrManager.Stub.asInterface(getBinderService(Context.VR_SERVICE));
         if (vrManager != null) {
@@ -1332,11 +1283,6 @@ public final class PowerManagerService extends SystemService
         filter = new IntentFilter();
         filter.addAction(Intent.ACTION_DOCK_EVENT);
         mContext.registerReceiver(new DockReceiver(), filter, null, mHandler);
-        filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_POWER_CONNECTED);
-        filter.addAction(Intent.ACTION_POWER_DISCONNECTED);
-        filter.addAction(Intent.ACTION_BATTERY_CHANGED);
-        mContext.registerReceiver(new BatteryInfoReceiver(), filter, null, mHandler);
     }
 
     @VisibleForTesting
@@ -1393,22 +1339,6 @@ public final class PowerManagerService extends SystemService
             mProximityWakeLock = mContext.getSystemService(PowerManager.class)
                     .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ProximityWakeLock");
         }
-        mSmartChargingLevelDefaultConfig = resources.getInteger(
-                com.android.internal.R.integer.config_smartChargingBatteryLevel);
-        mPowerInputSuspendSysfsNode = resources.getString(
-                com.android.internal.R.string.config_SmartChargingSysfsNode);
-        mPowerInputSuspendValue = resources.getString(
-                com.android.internal.R.string.config_SmartChargingSuspendValue);
-        mPowerInputResumeValue = resources.getString(
-                com.android.internal.R.string.config_SmartChargingResumeValue);
-        mSmartChargingResetStats = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.SMART_CHARGING_RESET_STATS, 0) == 1;
-
-         // Smart Cutoff
-        mSmartCutoffTemperatureDefaultConfig = resources.getInteger(
-                com.android.internal.R.integer.config_smartCutoffTemperature);
-        mSmartCutoffResumeTemperatureConfig = resources.getInteger(
-                com.android.internal.R.integer.config_smartCutoffResumeTemperature);
     }
 
     private void updateSettingsLocked() {
@@ -1440,24 +1370,6 @@ public final class PowerManagerService extends SystemService
         mTheaterModeEnabled = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.THEATER_MODE_ON, 0) == 1;
         mAlwaysOnEnabled = mAmbientDisplayConfiguration.alwaysOnEnabled(UserHandle.USER_CURRENT);
-        mSmartChargingEnabled = Settings.System.getInt(resolver,
-                Settings.System.SMART_CHARGING, 0) == 1;
-        mSmartChargingLevel = Settings.System.getInt(resolver,
-                Settings.System.SMART_CHARGING_LEVEL,
-                mSmartChargingLevelDefaultConfig);
-        mSmartChargingResumeLevel = Settings.System.getInt(resolver,
-                Settings.System.SMART_CHARGING_RESUME_LEVEL,
-                mSmartChargingResumeLevelDefaultConfig);
-        mSmartChargingResetStats = Settings.System.getInt(resolver,
-                Settings.System.SMART_CHARGING_RESET_STATS, 0) == 1;
-        mSmartCutoffEnabled = Settings.System.getInt(resolver,
-                Settings.System.SMART_CUTOFF, 0) == 1;
-        mSmartCutoffTemperature = Settings.System.getInt(resolver,
-                Settings.System.SMART_CUTOFF_TEMPERATURE,
-                mSmartCutoffTemperatureDefaultConfig);
-        mSmartCutoffResumeTemperature = Settings.System.getInt(resolver,
-                Settings.System.SMART_CUTOFF_RESUME_TEMPERATURE,
-                mSmartCutoffResumeTemperatureConfig);
 
         if (mSupportsDoubleTapWakeConfig) {
             boolean doubleTapWakeEnabled = Settings.Secure.getIntForUser(resolver,
@@ -1490,7 +1402,6 @@ public final class PowerManagerService extends SystemService
     void handleSettingsChangedLocked() {
         updateSettingsLocked();
         updatePowerStateLocked();
-        updateSmartFeatureStatus();
     }
 
     private void acquireWakeLockInternal(IBinder lock, int displayId, int flags, String tag,
@@ -2390,47 +2301,6 @@ public final class PowerManagerService extends SystemService
             }
 
             mBatterySaverStateMachine.setBatteryStatus(mIsPowered, mBatteryLevel, mBatteryLevelLow);
-            updateSmartFeatureStatus();
-        }
-    }
-
-    /*
-     * Suspend or resume charging based on the current Smart Feature settings
-     */
-    private void updateSmartFeatureStatus() {
-        if (mPowerInputSuspended) {
-            boolean resumeBySmartCharging = !mSmartChargingEnabled || (mSmartChargingEnabled && (mBatteryLevel <= mSmartChargingResumeLevel));
-            boolean resumeBySmartCutoff = !mSmartCutoffEnabled || (mSmartCutoffEnabled && (mBatteryTemperature <= mSmartCutoffResumeTemperature));
-            // Charging should only be resumed when all factors vote yes
-            if (resumeBySmartCharging && resumeBySmartCutoff) {
-                try {
-                    FileUtils.stringToFile(mPowerInputSuspendSysfsNode, mPowerInputResumeValue);
-                    mPowerInputSuspended = false;
-                } catch (IOException e) {
-                    Slog.e(TAG, "failed to write to " + mPowerInputSuspendSysfsNode);
-                }
-                return;
-            }
-        } else {
-            boolean suspendBySmartCharging = mSmartChargingEnabled && (mBatteryLevel >= mSmartChargingLevel);
-            boolean suspendBySmartCutoff = mSmartCutoffEnabled && (mBatteryTemperature >= mSmartCutoffTemperature);
-            // Charging should be suspended when any of the factors vote yes
-            if (suspendBySmartCharging || suspendBySmartCutoff) {
-                try {
-                    FileUtils.stringToFile(mPowerInputSuspendSysfsNode, mPowerInputSuspendValue);
-                    mPowerInputSuspended = true;
-                } catch (IOException e) {
-                        Slog.e(TAG, "failed to write to " + mPowerInputSuspendSysfsNode);
-                }
-
-                if (suspendBySmartCharging && mSmartChargingResetStats) {
-                    try {
-                        mBatteryStats.resetStatistics();
-                    } catch (RemoteException e) {
-                        Slog.e(TAG, "failed to reset battery statistics");
-                    }
-                }
-            }
         }
     }
 
@@ -4938,19 +4808,6 @@ public final class PowerManagerService extends SystemService
                     mDockState = dockState;
                     mDirty |= DIRTY_DOCK_STATE;
                     updatePowerStateLocked();
-                }
-            }
-        }
-    }
-
-    private final class BatteryInfoReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            synchronized (mLock) {
-                int temperature = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0);
-                if (temperature > 0) {
-                    float temp = ((float) temperature) / 10f;
-                    mBatteryTemperature=(int) ((temp) + 0.5f);
                 }
             }
         }

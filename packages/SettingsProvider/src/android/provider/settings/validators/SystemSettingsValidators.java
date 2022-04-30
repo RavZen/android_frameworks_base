@@ -21,7 +21,6 @@ import static android.provider.settings.validators.SettingsValidators.BOOLEAN_VA
 import static android.provider.settings.validators.SettingsValidators.COMPONENT_NAME_VALIDATOR;
 import static android.provider.settings.validators.SettingsValidators.LENIENT_IP_ADDRESS_VALIDATOR;
 import static android.provider.settings.validators.SettingsValidators.NON_NEGATIVE_INTEGER_VALIDATOR;
-import static android.provider.settings.validators.SettingsValidators.PERCENTAGE_INTEGER_VALIDATOR;
 import static android.provider.settings.validators.SettingsValidators.URI_VALIDATOR;
 import static android.provider.settings.validators.SettingsValidators.VIBRATION_INTENSITY_VALIDATOR;
 
@@ -211,12 +210,5 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.ENABLE_RIPPLE_EFFECT, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.DOZE_ON_CHARGE, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.NOTIFICATION_HEADERS, BOOLEAN_VALIDATOR);
-        VALIDATORS.put(System.SMART_CHARGING, BOOLEAN_VALIDATOR);
-        VALIDATORS.put(System.SMART_CHARGING_LEVEL, PERCENTAGE_INTEGER_VALIDATOR);
-        VALIDATORS.put(System.SMART_CHARGING_RESUME_LEVEL, PERCENTAGE_INTEGER_VALIDATOR);
-        VALIDATORS.put(System.SMART_CHARGING_RESET_STATS, BOOLEAN_VALIDATOR);
-        VALIDATORS.put(System.SMART_CUTOFF, BOOLEAN_VALIDATOR);
-        VALIDATORS.put(System.SMART_CUTOFF_TEMPERATURE, new InclusiveIntegerRangeValidator(1, 50));
-        VALIDATORS.put(System.SMART_CUTOFF_RESUME_TEMPERATURE, new InclusiveIntegerRangeValidator(0, 49));
     }
 }

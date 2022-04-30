@@ -826,8 +826,8 @@ public final class BatteryStatsService extends IBatteryStats.Stub
     }
 
     public void resetStatistics() {
-        /*mContext.enforceCallingPermission(
-                android.Manifest.permission.RESET_BATTERY_STATS, null);*/
+        mContext.enforceCallingPermission(
+                android.Manifest.permission.RESET_BATTERY_STATS, null);
         synchronized (mStats) {
             mStats.resetAllStatsCmdLocked();
         }
