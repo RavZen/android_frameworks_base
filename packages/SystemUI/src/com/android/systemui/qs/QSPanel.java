@@ -451,7 +451,7 @@ public class QSPanel extends LinearLayout implements Tunable {
 
         if (mBrightnessView != null) {
             boolean bottom = Dependency.get(TunerService.class).getValue(
-                    QS_BRIGHTNESS_POSITION_BOTTOM, 0) == 1;
+                    QS_BRIGHTNESS_POSITION_BOTTOM, 1) == 1;
             if (!mUsingHorizontalLayout) {
                 switchToParent(mBrightnessView, parent, bottom ? index : 0);
                 index++;

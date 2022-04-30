@@ -330,7 +330,7 @@ public class NetworkTraffic extends TextView {
     protected void setMode() {
         ContentResolver resolver = mContext.getContentResolver();
         mIsEnabled = Settings.System.getIntForUser(resolver,
-                Settings.System.NETWORK_TRAFFIC_STATE, 0,
+                Settings.System.NETWORK_TRAFFIC_STATE, 1,
                 UserHandle.USER_CURRENT) == 1;
         mLocation = Settings.System.getIntForUser(resolver,
                 Settings.System.NETWORK_TRAFFIC_LOCATION, 0,
@@ -339,7 +339,7 @@ public class NetworkTraffic extends TextView {
                 Settings.System.NETWORK_TRAFFIC_MODE, 0,
                 UserHandle.USER_CURRENT);
         mAutoHideThreshold = Settings.System.getIntForUser(resolver,
-                Settings.System.NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD, 0,
+                Settings.System.NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD, 2,
                 UserHandle.USER_CURRENT);
         mRefreshInterval = Settings.System.getIntForUser(resolver,
                 Settings.System.NETWORK_TRAFFIC_REFRESH_INTERVAL, 1,

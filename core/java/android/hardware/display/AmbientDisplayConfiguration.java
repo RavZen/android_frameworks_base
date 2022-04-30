@@ -212,7 +212,7 @@ public class AmbientDisplayConfiguration {
 
     private boolean alwaysOnChargingEnabled(int user) {
         final boolean dozeOnChargeEnabled = Settings.System.getIntForUser(
-                mContext.getContentResolver(), Settings.System.DOZE_ON_CHARGE, 0, user) == 1;
+                mContext.getContentResolver(), Settings.System.DOZE_ON_CHARGE, 1, user) == 1;
         if (dozeOnChargeEnabled) {
             final Intent intent = mContext.registerReceiver(null, sIntentFilter);
             if (intent != null) {
