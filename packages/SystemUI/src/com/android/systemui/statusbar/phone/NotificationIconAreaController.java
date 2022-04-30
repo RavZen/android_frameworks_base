@@ -1,5 +1,7 @@
 package com.android.systemui.statusbar.phone;
 
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.res.Resources;
@@ -100,6 +102,7 @@ public class NotificationIconAreaController implements
 
     private int mAodIconAppearTranslation;
 
+    boolean NewIconStyle;
     private boolean mAnimationsEnabled;
     private int mAodIconTint;
     private boolean mAodIconsVisible;
@@ -149,6 +152,9 @@ public class NotificationIconAreaController implements
         initializeNotificationAreaViews(context);
         reloadAodColor();
         darkIconDispatcher.addDarkReceiver(this);
+
+        NewIconStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
+            Settings.System.STATUSBAR_ICONS_STYLE, 1, UserHandle.USER_CURRENT) == 1;
 
         final TunerService tunerService = Dependency.get(TunerService.class);
         tunerService.addTunable(this, STATUSBAR_NOTIF_COUNT);
@@ -587,7 +593,7 @@ public class NotificationIconAreaController implements
         if (colorize) {
             color = DarkIconDispatcher.getTint(mTintArea, v, tint);
         }
-        if (v.getStatusBarIcon().pkg.contains("systemui")) {
+        if (v.getStatusBarIcon().pkg.contains("systemui") || !NewIconStyle) {
             v.setStaticDrawableColor(color);
             v.setDecorColor(tint);
         } else {

@@ -5719,6 +5719,13 @@ public final class Settings {
         public static final String SMART_CUTOFF_RESUME_TEMPERATURE = "smart_cutoff_resume_temperature";
 
         /**
+         * Whether StatusBar icons should use app icon
+         * @hide
+         */
+        public static final String STATUSBAR_ICONS_STYLE = "statusbar_icons_style";
+
+
+        /**
          * These are all public system settings
          *
          * @hide
@@ -5833,6 +5840,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(LOCKSCREEN_BATTERY_INFO);
             PRIVATE_SETTINGS.add(HEADSET_CONNECT_PLAYER);
             PRIVATE_SETTINGS.add(BACK_GESTURE_HAPTIC);
+            PRIVATE_SETTINGS.add(STATUSBAR_ICONS_STYLE);
         }
 
         /**
