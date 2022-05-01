@@ -63,6 +63,7 @@ import com.android.systemui.qs.tiles.CaffeineTile;
 import com.android.systemui.qs.tiles.AmbientDisplayTile;
 import com.android.systemui.qs.tiles.AODTile;
 import com.android.systemui.qs.tiles.UsbTetherTile;
+import com.android.systemui.qs.tiles.LocaleTile;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -112,6 +113,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<DataSwitchTile> mDataSwitchTileProvider;
     private final Provider<RefreshRateTile> mRefreshRateTileProvider;
     private final Provider<FPSInfoTile> mFPSInfoTileProvider;
+    private final Provider<LocaleTile> mLocaleTileProvider;
 
     private final Lazy<QSHost> mQsHostLazy;
     private final Provider<CustomTile.Builder> mCustomTileBuilderProvider;
@@ -157,6 +159,7 @@ public class QSFactoryImpl implements QSFactory {
             Provider<VolumeTile> volumeTileProvider,
             Provider<DataSwitchTile> dataSwitchTileProvider,
             Provider<RefreshRateTile> refreshRateTileProvider,
+            Provider<LocaleTile> localeTileProvider,
             Provider<FPSInfoTile> fpsInfoTileProvider) {
         mQsHostLazy = qsHostLazy;
         mCustomTileBuilderProvider = customTileBuilderProvider;
@@ -199,6 +202,7 @@ public class QSFactoryImpl implements QSFactory {
         mDataSwitchTileProvider = dataSwitchTileProvider;
         mRefreshRateTileProvider = refreshRateTileProvider;
         mFPSInfoTileProvider = fpsInfoTileProvider;
+        mLocaleTileProvider = localeTileProvider;
     }
 
     public QSTile createTile(String tileSpec) {
@@ -287,6 +291,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mRefreshRateTileProvider.get();
             case "fpsinfo":
                 return mFPSInfoTileProvider.get();
+            case "locale":
+                return mLocaleTileProvider.get();
         }
 
         // Custom tiles
