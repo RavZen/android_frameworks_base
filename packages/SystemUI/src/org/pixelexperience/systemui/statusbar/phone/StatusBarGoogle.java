@@ -67,6 +67,7 @@ import com.android.systemui.statusbar.NotificationViewHierarchyManager;
 import com.android.systemui.statusbar.OperatorNameViewController;
 import com.android.systemui.statusbar.PulseExpansionHandler;
 import com.android.systemui.statusbar.SysuiStatusBarStateController;
+import com.android.systemui.statusbar.charging.WiredChargingRippleController;
 import com.android.systemui.statusbar.connectivity.NetworkController;
 import com.android.systemui.statusbar.events.SystemStatusAnimationScheduler;
 import com.android.systemui.statusbar.notification.DynamicPrivacyController;
@@ -114,7 +115,9 @@ import com.android.systemui.statusbar.policy.BurnInProtectionController;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.DeviceProvisionedController;
 import com.android.systemui.statusbar.policy.ExtensionController;
+import com.android.systemui.statusbar.policy.FlashlightController;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
+import com.android.systemui.statusbar.policy.TaskHelper;
 import com.android.systemui.statusbar.policy.UserInfoControllerImpl;
 import com.android.systemui.statusbar.policy.UserSwitcherController;
 import com.android.systemui.statusbar.window.StatusBarWindowController;
@@ -250,6 +253,7 @@ public class StatusBarGoogle extends StatusBar {
                            PluginManager pluginManager,
                            Optional<LegacySplitScreen> splitScreenOptional,
                            LightsOutNotifController lightsOutNotifController,
+                           FlashlightController flashlightController,
                            StatusBarNotificationActivityStarter.Builder
                                    statusBarNotificationActivityStarterBuilder,
                            ShadeController shadeController,
@@ -269,6 +273,7 @@ public class StatusBarGoogle extends StatusBar {
                            StatusBarTouchableRegionManager statusBarTouchableRegionManager,
                            NotificationIconAreaController notificationIconAreaController,
                            BrightnessSliderController.Factory brightnessSliderFactory,
+                           WiredChargingRippleController chargingRippleAnimationController,
                            WallpaperController wallpaperController,
                            OngoingCallController ongoingCallController,
                            SystemStatusAnimationScheduler animationScheduler,
@@ -288,6 +293,7 @@ public class StatusBarGoogle extends StatusBar {
                            DumpManager dumpManager,
                            ActivityLaunchAnimator activityLaunchAnimator,
                            BurnInProtectionController burnInProtectionController,
+                           TaskHelper taskHelper,
                            SmartSpaceController smartSpaceController,
                            WallpaperNotifier wallpaperNotifier,
                            Optional<ReverseChargingViewController> reverseChargingViewController,
@@ -306,16 +312,16 @@ public class StatusBarGoogle extends StatusBar {
                 dozeParameters, scrimController, lockscreenWallpaperLazy, lockscreenGestureLogger, biometricUnlockControllerLazy,
                 dozeServiceHost, powerManager, screenPinningRequest, dozeScrimController, volumeComponent, commandQueue,
                 collapsedStatusBarFragmentLogger, statusBarComponentFactory, pluginManager, splitScreenOptional,
-                lightsOutNotifController, statusBarNotificationActivityStarterBuilder, shadeController, statusBarKeyguardViewManager,
+                lightsOutNotifController, flashlightController, statusBarNotificationActivityStarterBuilder, shadeController, statusBarKeyguardViewManager,
                 viewMediatorCallback, initController, timeTickHandler, pluginDependencyProvider, keyguardDismissUtil,
                 extensionController, userInfoControllerImpl, operatorNameViewControllerFactory, phoneStatusBarPolicy,
                 keyguardIndicationController, demoModeController, notificationShadeDepthControllerLazy,
-                statusBarTouchableRegionManager, notificationIconAreaController, brightnessSliderFactory, wallpaperController,
+                statusBarTouchableRegionManager, notificationIconAreaController, brightnessSliderFactory, chargingRippleAnimationController, wallpaperController,
                 ongoingCallController, animationScheduler, locationPublisher, statusBarIconController,
                 statusBarHideIconsForBouncerManager, lockscreenShadeTransitionController, featureFlags,
                 keyguardUnlockAnimationController, mainHandler, delayableExecutor, messageRouter, wallpaperManager,
                 unlockedScreenOffAnimationController, startingSurfaceOptional, tunerService, dumpManager, activityLaunchAnimator,
-                burnInProtectionController);
+                burnInProtectionController, taskHelper);
         mSmartSpaceController = smartSpaceController;
         mWallpaperNotifier = wallpaperNotifier;
         mReverseChargingViewController = reverseChargingViewController;
