@@ -30,7 +30,7 @@
         android:layout_gravity="left"
         android:id="@+id/notification_animation_left_solid"
         android:scaleType="fitXY"
-        android:layout_width="125px"
+        android:layout_width="150px"
         android:layout_height="match_parent"
         android:src="@drawable/ambient_light_pulse_left_solid"/>
     <ImageView
@@ -39,7 +39,7 @@
         android:layout_gravity="right"
         android:id="@+id/notification_animation_right_solid"
         android:scaleType="fitXY"
-        android:layout_width="125px"
+        android:layout_width="150px"
         android:layout_height="match_parent"
         android:src="@drawable/ambient_light_pulse_right_solid"/>
 
