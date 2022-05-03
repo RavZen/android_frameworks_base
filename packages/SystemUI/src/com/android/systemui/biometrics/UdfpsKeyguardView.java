@@ -70,7 +70,7 @@ public class UdfpsKeyguardView extends UdfpsAnimationView {
     private float mBurnInProgress;
     private float mInterpolatedDarkAmount;
 
-    private boolean mSuperiorUdfpsIcon;
+    private boolean mCustomUdfpsIcon;
 
     public UdfpsKeyguardView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -120,10 +120,11 @@ public class UdfpsKeyguardView extends UdfpsAnimationView {
     }
 
     private void updateIcon() {
-        mSuperiorUdfpsIcon = Settings.System.getInt(mContext.getContentResolver(),
+        mCustomUdfpsIcon = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.UDFPS_ICON, 0) != 0
-                && SuperiorUtils.isPackageInstalled(mContext, "com.superior.udfps.resources");
-        mBgProtection.setImageDrawable(mSuperiorUdfpsIcon
+                && SuperiorUtils.isPackageInstalled(mContext,
+                "com.superior.udfps.resources");
+        mBgProtection.setImageDrawable(mCustomUdfpsIcon
                 ? mFingerprintDrawable :
                 getContext().getDrawable(R.drawable.fingerprint_bg));
     }
@@ -145,7 +146,7 @@ public class UdfpsKeyguardView extends UdfpsAnimationView {
         mLockScreenFp.setTranslationX(mBurnInOffsetX);
         mLockScreenFp.setTranslationY(mBurnInOffsetY);
         mLockScreenFp.setProgress(1f - mInterpolatedDarkAmount);
-        mLockScreenFp.setAlpha(mSuperiorUdfpsIcon ? 0.0f
+        mLockScreenFp.setAlpha(mCustomUdfpsIcon ? 0.0f
                 : (1f - mInterpolatedDarkAmount) * 255);
     }
 
@@ -181,7 +182,7 @@ public class UdfpsKeyguardView extends UdfpsAnimationView {
     @Override
     protected int updateAlpha() {
         int alpha = super.updateAlpha();
-        mLockScreenFp.setAlpha(mSuperiorUdfpsIcon ? 0.0f : alpha / 255f);
+        mLockScreenFp.setAlpha(mCustomUdfpsIcon ? 0.0f : alpha / 255f);
         if (mInterpolatedDarkAmount != 0f) {
             mBgProtection.setAlpha(1f - mInterpolatedDarkAmount);
         } else {

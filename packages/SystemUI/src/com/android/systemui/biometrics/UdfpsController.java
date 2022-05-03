@@ -167,7 +167,6 @@ public class UdfpsController implements DozeReceiver {
     private boolean mAttemptedToDismissKeyguard;
     private Set<Callback> mCallbacks = new HashSet<>();
 
-
     private UdfpsAnimation mUdfpsAnimation;
 
     @VisibleForTesting

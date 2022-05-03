@@ -1,4 +1,3 @@
-
 /**
  * Copyright (C) 2019 The Android Open Source Project
  *
@@ -21,19 +20,19 @@ import static com.android.systemui.doze.util.BurnInHelperKt.getBurnInOffset;
 import static com.android.systemui.doze.util.BurnInHelperKt.getBurnInProgressOffset;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.pm.PackageManager;
-import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
-import android.graphics.drawable.AnimationDrawable;
+import android.content.res.Resources;
 import android.graphics.PixelFormat;
+import android.graphics.drawable.AnimationDrawable;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.provider.Settings;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.util.MathUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.util.AttributeSet;
-import android.util.MathUtils;
-import android.util.Log;
 
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
