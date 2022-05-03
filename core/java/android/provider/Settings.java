@@ -5677,10 +5677,18 @@ public final class Settings {
         public static final String USE_OLD_MOBILETYPE = "use_old_mobiletype";   
 
         /**
+         * Whether to wake the display when plugging or unplugging the charger
+         *
+         * @hide
+         */
+        public static final String WAKE_WHEN_PLUGGED_OR_UNPLUGGED = "wake_when_plugged_or_unplugged";
+
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
          * the setting value. See an example above.
+         * @hide
          */
         public static final String STATUSBAR_NOTIF_COUNT = "statusbar_notif_count";
 
@@ -5688,7 +5696,6 @@ public final class Settings {
          * reTicker Colored
          * @hide
          */
-        @Readable
         public static final String RETICKER_COLORED = "reticker_colored";
 
         /**
