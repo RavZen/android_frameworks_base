@@ -5669,6 +5669,14 @@ public final class Settings {
          * Show the pending notification counts as overlays on the status bar
          * @hide
          */
+        public static final String ROAMING_INDICATOR_ICON = "roaming_indicator_icon";
+
+        /**
+         * IMPORTANT: If you add a new public settings you also have to add it to
+         * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
+         * it to PRIVATE_SETTINGS below. Also add a validator that can validate
+         * the setting value. See an example above.
+         */
         public static final String STATUSBAR_NOTIF_COUNT = "statusbar_notif_count";
 
         /**
