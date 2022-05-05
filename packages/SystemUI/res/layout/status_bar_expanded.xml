@@ -32,22 +32,22 @@
         android:animateLayoutChanges="true"
         android:elevation="100dp"
         android:background="@drawable/reticker_background"
-        android:layout_marginTop="@dimen/status_bar_header_height_keyguard"
+        android:layout_marginTop="42dp"
         android:visibility="gone"
-        android:paddingBottom="4dp"
-        android:paddingTop="4dp"
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/ticker_comeback_icon"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="12dp"
+            android:layout_marginLeft="8dp"
             android:background="@drawable/qs_alike_top"
-            android:layout_width="16dp"
-            android:layout_height="16dp"/>
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
         <TextView
             android:id="@+id/ticker_content"
             android:layout_marginLeft="8dp"
