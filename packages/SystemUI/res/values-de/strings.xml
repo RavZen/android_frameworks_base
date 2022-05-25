@@ -883,4 +883,8 @@
     <string name="wifi_scan_notify_message" msgid="3753839537448621794">"Zur Verbesserung der Gerätenutzung können Apps und Dienste weiter nach WLANs suchen, auch wenn die WLAN-Funktion deaktiviert ist. Dies lässt sich in den Einstellungen für die WLAN-Suche ändern. "<annotation id="link">"Ändern"</annotation></string>
     <string name="turn_off_airplane_mode" msgid="8425587763226548579">"Flugmodus deaktivieren"</string>
     <string name="qs_user_switch_dialog_title" msgid="3045189293587781366">"Nutzer auswählen"</string>
+
+        <!-- Language toggle tile -->
+    <string name="quick_settings_locale_label">Sprache</string>
+    <string name="quick_settings_locale_more_locales_toast">Bitte konfigurieren Sie mehrere Sprachen, um die Umschaltfunktion zu aktivieren</string>
 </resources>

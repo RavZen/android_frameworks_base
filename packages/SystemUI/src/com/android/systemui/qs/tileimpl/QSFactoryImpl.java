@@ -76,6 +76,7 @@ import com.android.systemui.qs.tiles.VpnTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.qs.tiles.WorkModeTile;
 import com.android.systemui.util.leak.GarbageMonitor;
+import com.android.systemui.qs.tiles.LocaleTile;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -138,6 +139,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<AntiFlickerTile> mAntiFlickerTileProvider;
     private final Provider<RefreshRateTile> mRefreshRateTileProvider;
     private final Provider<SmartPixelsTile> mSmartPixelsTileProvider;
+    private final Provider<LocaleTile> mLocaleTileProvider;
 
     private final Lazy<QSHost> mQsHostLazy;
     private final Provider<CustomTile.Builder> mCustomTileBuilderProvider;
@@ -196,7 +198,8 @@ public class QSFactoryImpl implements QSFactory {
             Provider<ReadingModeTile> readingModeTileProvider,
             Provider<AntiFlickerTile> antiFlickerTileProvider,
             Provider<RefreshRateTile> refreshRateTileProvider,
-            Provider<SmartPixelsTile> smartPixelsTileProvider) {
+            Provider<SmartPixelsTile> smartPixelsTileProvider,
+            Provider<LocaleTile> localeTileProvider) {
         mQsHostLazy = qsHostLazy;
         mCustomTileBuilderProvider = customTileBuilderProvider;
 
@@ -251,6 +254,7 @@ public class QSFactoryImpl implements QSFactory {
         mAntiFlickerTileProvider = antiFlickerTileProvider;
         mRefreshRateTileProvider = refreshRateTileProvider;
         mSmartPixelsTileProvider = smartPixelsTileProvider;
+        mLocaleTileProvider = localeTileProvider;
     }
 
     public QSTile createTile(String tileSpec) {
@@ -366,6 +370,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mRefreshRateTileProvider.get();
             case "smartpixels":
                 return mSmartPixelsTileProvider.get();
+            case "locale":
+                return mLocaleTileProvider.get();
         }
         // Custom tiles
         if (tileSpec.startsWith(CustomTile.PREFIX)) {
