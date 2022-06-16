@@ -106,7 +106,7 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
     // Duration of the Keyguard dismissal animation in case the user is currently locked. This is to
     // make everything a bit slower to bridge a gap until the user is unlocked and home screen has
     // dranw its first frame.
-    private static final long KEYGUARD_DISMISS_DURATION_LOCKED = 2000;
+    private static final long KEYGUARD_DISMISS_DURATION_LOCKED = 2500;
 
     private static String TAG = "StatusBarKeyguardViewManager";
 
