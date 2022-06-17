@@ -470,11 +470,13 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
 
     void setChipVisibility(boolean visibility) {
         if (visibility) {
+            mQSCarriers.setVisibility(View.GONE);
             // Animates the icons and battery indicator from alpha 0 to 1, when the chip is visible
             mIconsAlphaAnimator = mIconsAlphaAnimatorFixed;
             mIconsAlphaAnimator.setPosition(mKeyguardExpansionFraction);
             mBatteryRemainingIcon.setClickable(!visibility || mKeyguardExpansionFraction == 1f);
         } else {
+            mQSCarriers.setVisibility(View.VISIBLE);
             mIconsAlphaAnimator = null;
             mIconContainer.setAlpha(1);
             mBatteryRemainingIcon.setAlpha(1);
