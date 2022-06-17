@@ -76,6 +76,7 @@
         android:minHeight="@dimen/qs_header_row_min_height"
         android:minWidth="48dp"
         android:layout_marginStart="8dp"
+         android:visibility="invisible"
         android:layout_gravity="end|center_vertical"
         android:focusable="false"/>
 
@@ -85,7 +86,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
         android:visibility="gone"
         />
 

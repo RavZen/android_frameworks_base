@@ -84,12 +84,25 @@
 
     </FrameLayout>
 
+
+    <include layout="@layout/qs_carrier_group"
+        android:id="@+id/carrier_group"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:minHeight="@dimen/qs_header_row_min_height"
+        android:minWidth="48dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_gravity="end|center_vertical"
+        android:gravity="center_vertical|end"
+        android:focusable="false"/>
+
     <com.android.systemui.statusbar.policy.NetworkTraffic
         android:id="@+id/networkTraffic"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginStart="6dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="8dp"
         android:singleLine="false"
         android:lineSpacingMultiplier="1.2"
         systemui:showDark="false"
