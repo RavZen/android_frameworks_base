@@ -27,6 +27,8 @@ import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
+import android.provider.Settings.System
+import android.os.UserHandle
 import android.util.PathParser
 import android.util.TypedValue
 
@@ -141,6 +143,15 @@ open class ThemedBatteryDrawable(private val context: Context, frameColor: Int) 
         p.style = Paint.Style.FILL_AND_STROKE
     }
 
+    private val chargePaint = Paint(Paint.ANTI_ALIAS_FLAG).also { p ->
+        p.color = Utils.getColorStateListDefaultColor(context, R.color.batterymeter_bolt_color)
+        p.alpha = 255
+        p.isDither = true
+        p.strokeWidth = 0f
+        p.style = Paint.Style.FILL_AND_STROKE
+        p.blendMode = BlendMode.SRC
+    }
+
     private val errorPaint = Paint(Paint.ANTI_ALIAS_FLAG).also { p ->
         p.color = Utils.getColorStateListDefaultColor(context, R.color.batterymeter_plus_color)
         p.alpha = 255
@@ -169,9 +180,22 @@ open class ThemedBatteryDrawable(private val context: Context, frameColor: Int) 
         intrinsicHeight = (Companion.HEIGHT * density).toInt()
         intrinsicWidth = (Companion.WIDTH * density).toInt()
 
+        val setCustomBatteryLevelTint = System.getIntForUser(
+            context.getContentResolver(),
+            System.BATTERY_LEVEL_COLORS, 0, UserHandle.USER_CURRENT
+        ) === 1
+        
         val res = context.resources
-        val levels = res.obtainTypedArray(R.array.batterymeter_color_levels)
-        val colors = res.obtainTypedArray(R.array.batterymeter_color_values)
+        val levels = if(setCustomBatteryLevelTint)
+            res.obtainTypedArray(R.array.custom_batterymeter_color_levels)
+        else
+            res.obtainTypedArray(R.array.batterymeter_color_levels)
+        
+        val colors = if(setCustomBatteryLevelTint) 
+            res.obtainTypedArray(R.array.custom_batterymeter_color_values)
+        else
+            res.obtainTypedArray(R.array.batterymeter_color_values)
+            
         val N = levels.length()
         colorLevels = IntArray(2 * N)
         for (i in 0 until N) {
@@ -218,7 +242,7 @@ open class ThemedBatteryDrawable(private val context: Context, frameColor: Int) 
             // Clip out the bolt shape
             unifiedPath.op(scaledBolt, Path.Op.DIFFERENCE)
             if (!invertFillIcon) {
-                c.drawPath(scaledBolt, fillPaint)
+                c.drawPath(scaledBolt, chargePaint)
             }
         }
 
@@ -251,7 +275,7 @@ open class ThemedBatteryDrawable(private val context: Context, frameColor: Int) 
         if (charging) {
             c.clipOutPath(scaledBolt)
             if (invertFillIcon) {
-                c.drawPath(scaledBolt, fillColorStrokePaint)
+                c.drawPath(scaledBolt, chargePaint)
             } else {
                 c.drawPath(scaledBolt, fillColorStrokeProtection)
             }

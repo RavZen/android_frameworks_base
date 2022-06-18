@@ -20,6 +20,8 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.*
 import android.graphics.drawable.Drawable
+import android.provider.Settings.System
+import android.os.UserHandle
 import android.util.TypedValue
 import com.android.settingslib.R
 import com.android.settingslib.Utils
@@ -42,7 +44,6 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
     private val padding = Rect()
     private val frame = RectF()
     private val boltFrame = RectF()
-    private val pathEffect = DashPathEffect(floatArrayOf(3f,2f),0f)
 
     private var chargeColor: Int
     private var iconTint = Color.WHITE
@@ -50,10 +51,6 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
     private var intrinsicHeight: Int
     private var height = 0
     private var width = 0
-
-    private var BATTERY_STYLE_CIRCLE = 1
-    private var BATTERY_STYLE_DOTTED_CIRCLE = 2
-    private var BATTERY_STYLE_BIG_DOTTED_CIRCLE = 9
 
     // Dual tone implies that battery level is a clipped overlay over top of the whole shape
     private var dualTone = false
@@ -81,12 +78,6 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
         }
 
     var batteryLevel = -1
-        set(value) {
-            field = value
-            postInvalidate()
-        }
-
-    var meterStyle = BATTERY_STYLE_CIRCLE
         set(value) {
             field = value
             postInvalidate()
@@ -155,7 +146,6 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
 
         iconTint = fillColor
         framePaint.color = bgColor
-        boltPaint.color = fillColor
         chargeColor = fillColor
 
         invalidateSelf()
@@ -169,14 +159,6 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
         framePaint.style = Paint.Style.STROKE
         batteryPaint.strokeWidth = strokeWidth
         batteryPaint.style = Paint.Style.STROKE
-        if (meterStyle == BATTERY_STYLE_DOTTED_CIRCLE ||
-               meterStyle == BATTERY_STYLE_BIG_DOTTED_CIRCLE) {
-            batteryPaint.pathEffect = pathEffect
-            powerSavePaint.pathEffect = pathEffect
-        } else {
-            batteryPaint.pathEffect = null
-            powerSavePaint.pathEffect = null
-        }
         powerSavePaint.strokeWidth = strokeWidth
         frame[
                 strokeWidth / 2.0f + padding.left, strokeWidth / 2.0f,
@@ -282,9 +264,22 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
     }
 
     init {
+        val setCustomBatteryLevelTint = System.getIntForUser(
+            context.getContentResolver(),
+            System.BATTERY_LEVEL_COLORS, 0, UserHandle.USER_CURRENT
+        ) === 1
+
         val res = context.resources
-        val color_levels = res.obtainTypedArray(R.array.batterymeter_color_levels)
-        val color_values = res.obtainTypedArray(R.array.batterymeter_color_values)
+        val color_levels = if(setCustomBatteryLevelTint)
+            res.obtainTypedArray(R.array.custom_batterymeter_color_levels)
+        else
+            res.obtainTypedArray(R.array.batterymeter_color_levels)
+        
+        val color_values = if(setCustomBatteryLevelTint) 
+            res.obtainTypedArray(R.array.custom_batterymeter_color_values)
+        else
+            res.obtainTypedArray(R.array.batterymeter_color_values)
+            
         colors = IntArray(2 * color_levels.length())
         for (i in 0 until color_levels.length()) {
             colors[2 * i] = color_levels.getInt(i, 0)

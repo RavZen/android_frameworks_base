@@ -107,5 +107,4 @@
         android:lineSpacingMultiplier="1.2"
         systemui:showDark="false"
         android:gravity="center_vertical|end"/>
-
 </LinearLayout>

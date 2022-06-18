@@ -56,6 +56,13 @@
     <dimen name="status_bar_mobile_type_padding">2dp</dimen>
     <dimen name="status_bar_mobile_type_padding_limit">10dp</dimen>
 
+    <!-- Width of the battery icon in the status bar when set to circle style. -->
+    <dimen name="status_bar_battery_icon_circle_width">14.5dp</dimen>
+    <!-- Height of the big battery circle icon in the status bar. -->
+    <dimen name="status_bar_battery_bigcircle_icon_height">20.5dp</dimen>
+     <!-- Width of the big battery circle icon in the status bar. -->
+    <dimen name="status_bar_battery_bigcircle_icon_width">20.5dp</dimen>
+
     <!-- FPSInfoService FPS Info text padding -->
     <dimen name="fps_info_text_padding">4dp</dimen>
 
@@ -80,6 +87,12 @@
     <dimen name="dismiss_all_button_width">55dp</dimen>
     <dimen name="dismiss_all_button_margin_bottom">48dp</dimen>
     <dimen name="dismiss_all_fab_src_size">24dp</dimen>
+    
+    <!-- Height of the landscape battery icon in the status bar. -->
+    <dimen name="status_bar_battery_icon_height_landscape">10.5dp</dimen>
+
+    <!-- Width of the landscape battery icon in the status bar. -->
+    <dimen name="status_bar_battery_icon_width_landscape">20dp</dimen>
 
     <!-- Floating rotation button margin when on 2-button navbar mode -->
     <dimen name="floating_rotation_button_min_margin_navbar">60dp</dimen>
@@ -93,19 +106,4 @@
     <dimen name="qs_top_brightness_margin_top">8dp</dimen>
     <dimen name="qs_top_brightness_margin_bottom">10dp</dimen>
     <dimen name="qs_bottom_brightness_margin_top">10dp</dimen>
-
-    <!-- Width of the battery icon in the status bar when set to circle style. -->
-    <dimen name="status_bar_battery_icon_circle_width">14.5dp</dimen>
-
-    <!-- Width of the big battery circle icon in the status bar. -->
-    <dimen name="status_bar_battery_icon_big_circle_width">20.5dp</dimen>
-
-    <!-- Height of the big battery circle icon in the status bar. -->
-    <dimen name="status_bar_battery_icon_big_circle_height">@dimen/status_bar_battery_icon_big_circle_width</dimen>
-
-    <!-- Height of the landscape battery icon in the status bar. -->
-    <dimen name="status_bar_battery_icon_height_landscape">12.5dp</dimen>
-
-    <!-- Width of the landscape battery icon in the status bar. -->
-    <dimen name="status_bar_battery_icon_width_landscape">24dp</dimen>
 </resources>
