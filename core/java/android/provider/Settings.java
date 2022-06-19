@@ -5488,6 +5488,24 @@ public final class Settings {
         public static final String VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
 
         /**
+         * Whether to show left lockscreen icon
+         * @hide
+         */
+        public static final String LOCKSCREEN_SHOW_VOICE_SHORTCUT = "lockscreen_show_voice_shortcut";
+
+        /**
+         * Whether to show right lockscreen icon
+         * @hide
+         */
+        public static final String LOCKSCREEN_SHOW_CAMERA_SHORTCUT = "lockscreen_show_camera_shortcut";
+        
+        /**
+         * Whether to show phone icon instead of voice on left lockscreen icon
+         * @hide
+         */
+        public static final String LOCKSCREEN_SHOW_LEFT_PHONE_SHORTCUT = "lockscreen_show_left_phone_shortcut";
+
+        /**
          * Enable and disable Artwork on background media notification
          * @hide
          */
