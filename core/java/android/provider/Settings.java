@@ -5493,6 +5493,29 @@ public final class Settings {
          */
         public static final String MEDIA_ARTWORK_ENABLED = "media_artwork_enabled";
 
+         /**
+         * @hide
+         */
+        public static final String LOCKSCREEN_SHOW_VOICE_SHORTCUT = "lockscreen_show_voice_shortcut";
+
+        /**
+         * Whether to show right lockscreen icon
+         * @hide
+         */
+        public static final String LOCKSCREEN_SHOW_CAMERA_SHORTCUT = "lockscreen_show_camera_shortcut";
+        
+        /**
+         * Whether to show phone icon instead of voice on left lockscreen icon
+         * @hide
+         */
+        public static final String LOCKSCREEN_SHOW_LEFT_PHONE_SHORTCUT = "lockscreen_show_left_phone_shortcut";
+
+        /**
+         * Enable and disable Artwork on background media notification
+         * @hide
+         */
+        public static final String MEDIA_ARTWORK_ENABLED = "media_artwork_enabled";
+
         /**
          * Whether or not to enable artwork blur.
          * Default 0.

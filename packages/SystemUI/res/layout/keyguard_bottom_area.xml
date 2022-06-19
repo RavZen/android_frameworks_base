@@ -63,20 +63,26 @@
         android:layout_height="@dimen/keyguard_affordance_height"
         android:layout_width="@dimen/keyguard_affordance_width"
         android:layout_gravity="bottom|end"
+        android:background="@drawable/keyguard_bottom_affordance_bg"
         android:src="@drawable/ic_camera_alt_24dp"
         android:scaleType="center"
+        android:layout_marginRight="36dp"
+        android:layout_marginBottom="36dp"
         android:contentDescription="@string/accessibility_camera_button"
-        android:tint="?attr/wallpaperTextColor" />
+        android:tint="?android:attr/textColorPrimary" />
 
     <com.android.systemui.statusbar.KeyguardAffordanceView
         android:id="@+id/left_button"
         android:layout_height="@dimen/keyguard_affordance_height"
         android:layout_width="@dimen/keyguard_affordance_width"
         android:layout_gravity="bottom|start"
+        android:background="@drawable/keyguard_bottom_affordance_bg"
         android:src="@*android:drawable/ic_phone"
         android:scaleType="center"
+        android:layout_marginLeft="36dp"
+        android:layout_marginBottom="36dp"
         android:contentDescription="@string/accessibility_phone_button"
-        android:tint="?attr/wallpaperTextColor" />
+        android:tint="?android:attr/textColorPrimary" />
 
     <ImageView
         android:id="@+id/wallet_button"
