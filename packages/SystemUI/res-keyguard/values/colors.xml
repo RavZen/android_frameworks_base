@@ -19,4 +19,7 @@
   <color name="bubbleHourHandColor">#C97343</color>
   <!-- Default color for minute hand of Bubble clock. -->
   <color name="bubbleMinuteHandColor">#F5C983</color>
+
+  <color name="lockscreen_clock_accent_color">@*android:color/accent_device_default</color>
+  <color name="lockscreen_clock_white_color">@*android:color/white</color>
 </resources>
