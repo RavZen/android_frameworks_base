@@ -148,7 +148,7 @@ public final class ClockManager {
         Resources res = context.getResources();
 
         addBuiltinClock(() -> new DefaultClockController(res, layoutInflater, colorExtractor));
-        addBuiltinClock(() -> new OOSClockController(res, layoutInflater, colorExtractor));
+        addBuiltinClock(() -> new OOSClockController(res, layoutInflater, colorExtractor, context));
         addBuiltinClock(() -> new SfunnyClockController(res, layoutInflater, colorExtractor));
         addBuiltinClock(() -> new ClockertinoClockController(res, layoutInflater, colorExtractor));
 
