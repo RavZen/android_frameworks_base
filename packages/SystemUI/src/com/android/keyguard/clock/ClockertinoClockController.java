@@ -59,7 +59,7 @@ public class ClockertinoClockController implements ClockPlugin {
     }
 
     public boolean shouldShowStatusArea() {
-        return false;
+        return true;
     }
 
     public boolean usesPreferredY() {
@@ -118,7 +118,7 @@ public class ClockertinoClockController implements ClockPlugin {
     }
 
     public int getPreferredY(int totalHeight) {
-        return totalHeight / 5;
+        return totalHeight / 2;
     }
 
     public void setTextColor(int color) {

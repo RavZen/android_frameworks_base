@@ -6,7 +6,7 @@
     android:layout_gravity="top|center_vertical|center_horizontal|center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="32dp"
+    android:paddingBottom="4dp"
     >
 
     <LinearLayout android:orientation="vertical"
@@ -19,6 +19,5 @@
             <TextClock android:textSize="60.5sp" android:textColor="?attr/wallpaperTextColorAccent" android:ellipsize="none" android:layout_gravity="center_horizontal" android:id="@+id/time_clock_accented" android:layout_width="wrap_content" android:layout_height="match_parent" android:format12Hour="h" android:format24Hour="kk"/>
             <TextClock android:textSize="60.5sp" android:textColor="?android:attr/colorAccent" android:ellipsize="none" android:layout_gravity="bottom|center_vertical|center_horizontal|center" android:id="@+id/time_clock" android:layout_width="wrap_content" android:layout_height="wrap_content" android:format12Hour=":mm" android:format24Hour=":mm"/>
         </LinearLayout>
-        <TextClock android:textSize="24sp" android:textColor="?attr/wallpaperTextColorAccent" android:ellipsize="none" android:layout_gravity="bottom|left|center_vertical|center_horizontal|center" android:id="@+id/timedate" android:paddingBottom="8dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:format12Hour=" MMMM  dd" android:format24Hour=" MMMM  dd"/>
     </LinearLayout>
 </com.android.keyguard.clock.ClockLayout>
