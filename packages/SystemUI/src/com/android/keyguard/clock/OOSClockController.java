@@ -15,6 +15,7 @@ import com.android.systemui.colorextraction.SysuiColorExtractor;
 import com.android.systemui.plugins.ClockPlugin;
 import java.util.TimeZone;
 import android.graphics.BitmapFactory;
+import android.text.Html;
 
 public class OOSClockController implements ClockPlugin {
     private ClockLayout mBigView;
@@ -55,7 +56,7 @@ public class OOSClockController implements ClockPlugin {
 
     
     public boolean shouldShowStatusArea() {
-        return false;
+        return true;
     }
 
     public OOSClockController(Resources resources, LayoutInflater layoutInflater, SysuiColorExtractor sysuiColorExtractor, Context context) {
@@ -76,7 +77,9 @@ public class OOSClockController implements ClockPlugin {
         mTimeClock = (TextClock) view.findViewById(R.id.time_clock);
         mTimeClockAccented = (TextClock) view.findViewById(R.id.time_clock_accented);
         mDay = (TextClock) view.findViewById(R.id.clock_day);
-        mDate = (TextClock) view.findViewById(R.id.timedate);
+
+        mTimeClockAccented.setFormat12Hour(Html.fromHtml("<strong>h</strong>"));
+        mTimeClockAccented.setFormat24Hour(Html.fromHtml("<strong>kk</strong>"));
     }
 
     
@@ -84,7 +87,6 @@ public class OOSClockController implements ClockPlugin {
         mView = null;
         mTimeClock = null;
         mDay = null;
-        mDate = null;
         mTimeClockAccented = null;
     }
 
@@ -119,7 +121,7 @@ public class OOSClockController implements ClockPlugin {
 
 
     public int getPreferredY(int totalHeight) {
-        return totalHeight / 5;
+        return totalHeight / 2;
     }
 
 
@@ -128,9 +130,8 @@ public class OOSClockController implements ClockPlugin {
         int mWhiteColor = mContext.getResources().getColor(R.color.lockscreen_clock_white_color);
 
         mTimeClock.setTextColor(mWhiteColor);
-        mTimeClockAccented.setTextColor(mAccentColor);
+        mTimeClockAccented.setTextColor(mWhiteColor);
         mDay.setTextColor(mWhiteColor);
-        mDate.setTextColor(mWhiteColor);
         mColor = color;
     }
 
@@ -151,23 +152,14 @@ public class OOSClockController implements ClockPlugin {
         mTimeClock.refreshTime();
         mTimeClockAccented.refreshTime();
         mDay.refreshTime();
-        mDate.refreshTime();
         setTextColor(mColor);
     }
 
 
     public void setDarkAmount(float darkAmount) {
-        int mAccentColor = mContext.getResources().getColor(R.color.lockscreen_clock_accent_color);
-        ClockLayout clockLayout = mView;
-        if (clockLayout != null) {
-            clockLayout.setDarkAmount(darkAmount);
-        }
-        int i = (darkAmount > 0.5f ? 1 : (darkAmount == 0.5f ? 0 : -1));
-        int i2 = -1;
-        mTimeClock.setTextColor(i < 0 ? mAccentColor : -1);
-        if (i < 0) {
-            i2 = mAccentColor;
-        }
-        mColor = i2;
+        int mWhiteColor = mContext.getResources().getColor(R.color.lockscreen_clock_white_color);
+
+        mTimeClock.setTextColor(mWhiteColor);
+        mTimeClockAccented.setTextColor(mWhiteColor);
     }
 }
