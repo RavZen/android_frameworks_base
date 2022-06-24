@@ -123,7 +123,7 @@ public class StatusBarIconControllerImpl extends StatusBarIconList implements Tu
     private boolean getIsOldSignalStyle() {
         return mSystemSettings.getIntForUser(
             Settings.System.USE_OLD_MOBILETYPE,
-            0, UserHandle.USER_CURRENT
+            1, UserHandle.USER_CURRENT
         ) == 1;
     }
 

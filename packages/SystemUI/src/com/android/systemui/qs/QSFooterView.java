@@ -257,7 +257,7 @@ public class QSFooterView extends FrameLayout {
 
     private void updateVisibilities() {
         mShouldShowDataUsage = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.QS_FOOTER_DATA_USAGE, 0,
+                Settings.System.QS_FOOTER_DATA_USAGE, 1,
                 UserHandle.USER_CURRENT) == 1;
 
         mSpace.setVisibility(mShouldShowDataUsage && mExpanded ? View.GONE : View.VISIBLE);

@@ -914,7 +914,7 @@ public class NotificationPanelViewController extends PanelViewController impleme
         switch (key) {
             case RETICKER_STATUS:
                 mReTickerStatus =
-                        TunerService.parseIntegerSwitch(newValue, false);
+                        TunerService.parseIntegerSwitch(newValue, true);
                 break;
             case RETICKER_COLORED:
                 mReTickerColored =
