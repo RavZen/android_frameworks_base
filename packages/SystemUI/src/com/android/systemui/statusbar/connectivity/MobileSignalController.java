@@ -128,7 +128,7 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
     private int mCallState = TelephonyManager.CALL_STATE_IDLE;
 
     // VoLTE Icon Style
-    private int mVoLTEicon = 0;
+    private int mVoLTEicon = 3;
     // VoWiFi Icon Style
     private int mVoWIFIicon = 0;
     private boolean mOverride = true;
@@ -327,7 +327,7 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
         switch (key) {
             case VOLTE_ICON_STYLE:
                 mVoLTEicon =
-                    TunerService.parseInteger(newValue, 1);
+                    TunerService.parseInteger(newValue, 3);
                 notifyListeners();
                 break;
             case VOWIFI_ICON_STYLE:
