@@ -208,7 +208,6 @@ import com.android.systemui.statusbar.policy.KeyguardUserSwitcherController;
 import com.android.systemui.statusbar.policy.KeyguardUserSwitcherView;
 import com.android.systemui.statusbar.policy.OnHeadsUpChangedListener;
 import com.android.systemui.unfold.SysUIUnfoldComponent;
-import com.android.systemui.statusbar.policy.PulseController;
 import com.android.systemui.util.Utils;
 import com.android.systemui.util.settings.SecureSettings;
 import com.android.systemui.wallet.controller.QuickAccessWalletController;
@@ -3087,7 +3086,6 @@ public class NotificationPanelViewController extends PanelViewController {
         if (mBarState != StatusBarState.KEYGUARD && !isFullyCollapsed()) {
             mStatusBar.updateDismissAllVisibility(true);
         }
-        mStatusBar.getPulseController().setQSShowing(mBarState != StatusBarState.KEYGUARD && !isFullyCollapsed());
     }
 
     private float getFadeoutAlpha() {
