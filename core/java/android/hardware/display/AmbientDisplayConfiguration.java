@@ -311,4 +311,10 @@ public class AmbientDisplayConfiguration {
     private boolean boolSettingSystem(String name, int user, int def) {
         return Settings.System.getIntForUser(mContext.getContentResolver(), name, def, user) != 0;
     }
+
+    /** {@hide} */
+    public boolean isAmbientGestureEnabled(int user) {
+        return Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.AMBIENT_WAKE_GESTURES, 1, user) != 0;
+    }
 }
