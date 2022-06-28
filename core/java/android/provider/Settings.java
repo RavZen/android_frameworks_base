@@ -5493,13 +5493,6 @@ public final class Settings {
         @Readable
         public static final String VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
 
-        /**
-         * Whether or not artwork should be shown as media notification background.
-         * Default 0.
-         * @hide
-         */
-        public static final String MEDIA_ARTWORK_ENABLED = "media_artwork_enabled";
-
          /**
          * @hide
          */
@@ -5633,12 +5626,6 @@ public final class Settings {
          * @hide
          */
         public static final String VOLTE_VOWIFI_OVERRIDE = "volte_vowifi_override";
-
-        /**
-         * Use doubletap as doze pulse triggers
-         * @hide
-         */
-        public static final String DOZE_TRIGGER_DOUBLETAP = "doze_trigger_doubletap";
 
         /**
          * Whether to use partial screenshot when using volume keys
