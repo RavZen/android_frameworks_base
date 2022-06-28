@@ -254,7 +254,7 @@
     <dimen name="overflow_dot_radius">2dp</dimen>
 
     <!-- the padding between dots in the icon overflow -->
-    <dimen name="overflow_icon_dot_padding">3dp</dimen>
+    <dimen name="overflow_icon_dot_padding">0dp</dimen>
 
     <!-- Dimensions related to screenshots -->
 
@@ -640,7 +640,7 @@
     <dimen name="notification_children_container_top_padding">8dp</dimen>
 
     <!-- end margin for system icons if multi user switch is hidden -->
-    <dimen name="system_icons_switcher_hidden_expanded_margin">16dp</dimen>
+    <dimen name="system_icons_switcher_hidden_expanded_margin">8dp</dimen>
 
     <dimen name="data_usage_graph_marker_width">4dp</dimen>
 

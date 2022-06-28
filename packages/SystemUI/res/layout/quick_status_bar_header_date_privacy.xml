@@ -59,6 +59,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical|center_horizontal"
+        android:paddingEnd="-32dp"
         android:visibility="gone" />
 
     <!-- Will hold security footer in landscape with media -->
@@ -101,8 +102,8 @@
         android:id="@+id/networkTraffic"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginStart="6dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginStart="-12dp"
+        android:layout_marginEnd="2dp"
         android:singleLine="false"
         android:lineSpacingMultiplier="1.2"
         systemui:showDark="false"

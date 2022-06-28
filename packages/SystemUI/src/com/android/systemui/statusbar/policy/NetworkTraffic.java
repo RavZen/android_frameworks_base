@@ -257,11 +257,11 @@ public class NetworkTraffic extends TextView {
     }
 
     protected RelativeSizeSpan getSpeedRelativeSizeSpan() {
-        return new RelativeSizeSpan(0.78f);
+        return new RelativeSizeSpan(0.72f);
     }
 
     protected RelativeSizeSpan getUnitRelativeSizeSpan() {
-        return new RelativeSizeSpan(0.70f);
+        return new RelativeSizeSpan(0.65f);
     }
 
     private Runnable mRunnable = new Runnable() {
@@ -381,7 +381,7 @@ public class NetworkTraffic extends TextView {
     protected void setSpacingAndFonts() {
         String txtFont = getResources().getString(com.android.internal.R.string.config_headlineFontFamily);
         setTypeface(Typeface.create(txtFont, Typeface.BOLD));
-        setLineSpacing(0.85f, 0.85f);
+        setLineSpacing(0.82f, 0.82f);
     }
 
     public void onDensityOrFontScaleChanged() {
