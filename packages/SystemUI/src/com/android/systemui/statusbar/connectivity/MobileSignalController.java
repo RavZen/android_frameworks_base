@@ -357,7 +357,7 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
                 break;
             case COMBINED_STATUS_BAR_SIGNAL_ICONS:
                 boolean value =
-                    TunerService.parseIntegerSwitch(newValue, false);
+                    TunerService.parseIntegerSwitch(newValue, true);
                 if (mProviderModelBehavior != value) {
                     mProviderModelBehavior = value;
                     restartSystemUI();
