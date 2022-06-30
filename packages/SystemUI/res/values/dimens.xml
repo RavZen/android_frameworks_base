@@ -954,7 +954,7 @@
     <!-- Size of the RAT type for CellularTile -->
 
     <!-- Size of media cards in the QSPanel carousel -->
-    <dimen name="qs_media_padding">16dp</dimen>
+    <dimen name="qs_media_padding">20dp</dimen>
     <dimen name="qs_media_album_size_small">72dp</dimen>
     <dimen name="qs_media_album_size">84dp</dimen>
     <dimen name="qs_media_album_radius">14dp</dimen>
