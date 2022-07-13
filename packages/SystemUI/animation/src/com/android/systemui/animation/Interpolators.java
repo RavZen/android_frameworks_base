@@ -106,6 +106,12 @@ public class Interpolators {
      */
     public static final Interpolator LEGACY_DECELERATE = new PathInterpolator(0f, 0f, 0.2f, 1f);
 
+     /**
+     * Custom Authripple animation - smoother then others
+     *
+     */
+    public static final Interpolator LEGACY_DECELERATE_CUSTOM = new PathInterpolator(0f, 0f, 0.3f, 1f);
+
     /**
      * Linear interpolator. Often used if the interpolator is for different properties who need
      * different interpolations.
@@ -121,6 +127,7 @@ public class Interpolators {
     public static final Interpolator FAST_OUT_SLOW_IN = LEGACY;
     public static final Interpolator FAST_OUT_LINEAR_IN = LEGACY_ACCELERATE;
     public static final Interpolator LINEAR_OUT_SLOW_IN = LEGACY_DECELERATE;
+    public static final Interpolator LINEAR_OUT_SLOW_IN_CUSTOM = LEGACY_DECELERATE_CUSTOM;
 
     /**
      * Like {@link #FAST_OUT_SLOW_IN}, but used in case the animation is played in reverse (i.e. t

@@ -176,7 +176,7 @@ class AuthRippleController @Inject constructor(
             val lightRevealScrim = statusBar.lightRevealScrim
             if (startLightRevealScrimOnKeyguardFadingAway && lightRevealScrim != null) {
                 ValueAnimator.ofFloat(.1f, 1f).apply {
-                    interpolator = Interpolators.LINEAR_OUT_SLOW_IN
+                    interpolator = Interpolators.LINEAR_OUT_SLOW_IN_CUSTOM
                     duration = RIPPLE_ANIMATION_DURATION
                     startDelay = keyguardStateController.keyguardFadingAwayDelay
                     addUpdateListener { animator ->
@@ -390,6 +390,6 @@ class AuthRippleController @Inject constructor(
     }
 
     companion object {
-        const val RIPPLE_ANIMATION_DURATION: Long = 1533
+        const val RIPPLE_ANIMATION_DURATION: Long = 1105
     }
 }
