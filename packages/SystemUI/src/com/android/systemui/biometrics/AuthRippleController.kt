@@ -84,10 +84,6 @@ class AuthRippleController @Inject constructor(
     private var udfpsController: UdfpsController? = null
     private var udfpsRadius: Float = -1f
 
-    private val isRippleEnabled: Boolean
-        get() = Settings.System.getIntForUser(context.contentResolver,
-            Settings.System.ENABLE_RIPPLE_EFFECT, 1, UserHandle.USER_CURRENT) == 1
-
     override fun onInit() {
         mView.setAlphaInDuration(sysuiContext.resources.getInteger(
                 R.integer.auth_ripple_alpha_in_duration).toLong())
@@ -142,6 +138,9 @@ class AuthRippleController @Inject constructor(
     }
 
     private fun showUnlockedRipple() {
+        var isRippleEnabled = Settings.System.getIntForUser(context.contentResolver,
+        Settings.System.ENABLE_RIPPLE_EFFECT, 1, UserHandle.USER_CURRENT) == 1
+
         if (!isRippleEnabled) return
 
         notificationShadeWindowController.setForcePluginOpen(true, this)
@@ -162,6 +161,9 @@ class AuthRippleController @Inject constructor(
     }
 
     override fun onKeyguardFadingAwayChanged() {
+        var isRippleEnabled = Settings.System.getIntForUser(context.contentResolver,
+        Settings.System.ENABLE_RIPPLE_EFFECT, 1, UserHandle.USER_CURRENT) == 1
+
         if (!isRippleEnabled) {
             // reset and hide the scrim so it doesn't appears on
             // the next notification shade usage
