@@ -73,6 +73,7 @@ import com.android.systemui.qs.tiles.VolumeTile;
 import com.android.systemui.qs.tiles.VpnTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.qs.tiles.WorkModeTile;
+import com.android.systemui.qs.tiles.SleepModeTile;
 import com.android.systemui.util.leak.GarbageMonitor;
 
 import org.pixelexperience.systemui.qs.tiles.BatterySaverTileGoogle;
@@ -145,7 +146,8 @@ public class QSFactoryImplGoogle extends QSFactoryImpl {
             Provider<RefreshRateTile> refreshRateTileProvider,
             Provider<SmartPixelsTile> smartPixelsTileProvider,
             Provider<MusicTile> musicTileProvider,
-            Provider<LocaleTile> localeTileProvider) {
+            Provider<LocaleTile> localeTileProvider,
+            Provider<SleepModeTile> sleepModeTileProvider) {
         super(qsHostLazy,
                 customTileBuilderProvider,
                 wifiTileProvider,
@@ -200,7 +202,8 @@ public class QSFactoryImplGoogle extends QSFactoryImpl {
                 refreshRateTileProvider,
                 smartPixelsTileProvider,
                 musicTileProvider,
-                localeTileProvider);
+                localeTileProvider,
+                sleepModeTileProvider);
         mReverseChargingTileProvider = reverseChargingTileProvider;
         mBatterySaverTileGoogleProvider = batterySaverTileGoogleProvider;
     }
