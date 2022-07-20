@@ -74,6 +74,9 @@ public class SleepModeController {
     private static int mSensorBlockState;
     private static int mExtraDarkMode;
 
+    private static int mAlarmBlockerState;
+    private static int mWakelockBlockerState;
+
     private static final String TAG = "SleepModeController";
     private static final int SLEEP_NOTIFICATION_ID = 727;
     public static final String SLEEP_MODE_TURN_OFF = "android.intent.action.SLEEP_MODE_TURN_OFF";
@@ -299,6 +302,26 @@ public class SleepModeController {
                     Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 1, UserHandle.USER_CURRENT);
         }
 
+        // Enable alarm blocker mode
+        boolean enableAlarmBlocker = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.SLEEP_MODE_ALARM_BLOCKER_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
+        if (enableAlarmBlocker) {
+            mAlarmBlockerState = Settings.Global.getInt(mContext.getContentResolver(),
+                    Settings.Global.ALARM_BLOCKING_ENABLED, 0);
+            Settings.Global.putInt(mContext.getContentResolver(),
+                    Settings.Global.ALARM_BLOCKING_ENABLED, 1);
+        }
+
+        // Enable wakelock blocker mode
+        boolean enableWakelockBlocker = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.SLEEP_MODE_WAKELOCK_BLOCKER_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
+        if (enableWakelockBlocker) {
+            mWakelockBlockerState = Settings.Global.getInt(mContext.getContentResolver(),
+                    Settings.Global.WAKELOCK_BLOCKING_ENABLED, 0);
+            Settings.Global.putInt(mContext.getContentResolver(),
+                    Settings.Global.WAKELOCK_BLOCKING_ENABLED, 1);
+        }
+
         // Set Ringer mode (0: Off, 1: Vibrate, 2:DND: 3:Silent)
         int ringerMode = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.SLEEP_MODE_RINGER_MODE, 0, UserHandle.USER_CURRENT);
@@ -383,6 +406,24 @@ public class SleepModeController {
         if (enablExtraDark) {
             Settings.Secure.putIntForUser(mContext.getContentResolver(),
                     Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, mExtraDarkMode, UserHandle.USER_CURRENT);
+        }
+
+        // Disable Alarmblocker
+        boolean enableAlarmBlocker = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.SLEEP_MODE_ALARM_BLOCKER_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
+
+        if (enableAlarmBlocker) {
+            Settings.Global.putInt(mContext.getContentResolver(),
+                    Settings.Global.ALARM_BLOCKING_ENABLED, mAlarmBlockerState);
+        }
+
+        // Disable Wakelockblocker
+        boolean enableWakelockBlocker = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.SLEEP_MODE_WAKELOCK_BLOCKER_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
+
+        if (enableWakelockBlocker) {
+            Settings.Global.putInt(mContext.getContentResolver(),
+                    Settings.Global.WAKELOCK_BLOCKING_ENABLED, mWakelockBlockerState);
         }
 
         // Set Ringer mode (0: Off, 1: Vibrate, 2:DND: 3:Silent)
