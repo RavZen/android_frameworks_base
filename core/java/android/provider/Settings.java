@@ -12261,6 +12261,18 @@ public final class Settings {
         public static final String SLEEP_MODE_EXTRA_DARK_TOGGLE = "sleep_mode_extra_dark_toggle";
 
         /**
+         * Whether to enable Wakelock blocker in Sleep Mode
+         * @hide
+         */
+        public static final String SLEEP_MODE_WAKELOCK_BLOCKER_TOGGLE = "sleep_mode_wakelock_blocker_toggle";
+
+        /**
+         * Whether to enable Alarm blocker in Sleep Mode
+         * @hide
+         */
+        public static final String SLEEP_MODE_ALARM_BLOCKER_TOGGLE = "sleep_mode_alarm_blocker_toggle";
+
+        /**
          * Ringer in Sleep Mode (0:OFF, 1:Vibrate, 2:DND, 3:Silent)
          * @hide
          */
