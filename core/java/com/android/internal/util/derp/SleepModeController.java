@@ -70,7 +70,6 @@ public class SleepModeController {
     private static boolean mSensorState;
     private static int mAODState;
     private static int mIdleState;
-    private static int mStandbyState;
     private static int mRingerState;
     private static int mZenState;
 
@@ -299,17 +298,13 @@ public class SleepModeController {
         }
 
         // Enable Aggressive battery
-        boolean enableAggressive = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+        boolean enableIdleManager = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.SLEEP_MODE_AGGRESSIVE_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
-        if (enableAggressive) {
-            mIdleState = Settings.Global.getInt(mContext.getContentResolver(),
-                    Settings.Global.AGGRESSIVE_IDLE_ENABLED, 0);
-            mStandbyState = Settings.Global.getInt(mContext.getContentResolver(),
-                    Settings.Global.AGGRESSIVE_STANDBY_ENABLED, 0);
-            Settings.Global.putInt(mContext.getContentResolver(),
-                    Settings.Global.AGGRESSIVE_IDLE_ENABLED, 1);
-            Settings.Global.putInt(mContext.getContentResolver(),
-                    Settings.Global.AGGRESSIVE_STANDBY_ENABLED, 1);
+        if (enableIdleManager) {
+            mIdleState = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.ARCANE_IDLE_MANAGER, 0);
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.ARCANE_IDLE_MANAGER, 1);
         }
 
         // Set Ringer mode (0: Off, 1: Vibrate, 2:DND: 3:Silent)
@@ -381,13 +376,11 @@ public class SleepModeController {
         }
 
         // Disable Aggressive battery
-        boolean enableAggressive = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+        boolean enableIdleManager = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.SLEEP_MODE_AGGRESSIVE_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
-        if (enableAggressive) {
-            Settings.Global.putInt(mContext.getContentResolver(),
-                    Settings.Global.AGGRESSIVE_IDLE_ENABLED, mIdleState);
-            Settings.Global.putInt(mContext.getContentResolver(),
-                    Settings.Global.AGGRESSIVE_STANDBY_ENABLED, mStandbyState);
+        if (enableIdleManager) {
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.ARCANE_IDLE_MANAGER, mIdleState);
         }
 
         // Set Ringer mode (0: Off, 1: Vibrate, 2:DND: 3:Silent)
