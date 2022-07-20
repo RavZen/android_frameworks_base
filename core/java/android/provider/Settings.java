@@ -12053,6 +12053,12 @@ public final class Settings {
         public static final String SLEEP_MODE_AGGRESSIVE_TOGGLE = "sleep_mode_aggressive_toggle";
 
         /**
+         * Whether to enable Extra dark in Sleep Mode
+         * @hide
+         */
+        public static final String SLEEP_MODE_EXTRA_DARK_TOGGLE = "sleep_mode_extra_dark_toggle";
+
+        /**
          * Ringer in Sleep Mode (0:OFF, 1:Vibrate, 2:DND, 3:Silent)
          * @hide
          */
