@@ -73,6 +73,8 @@ public class SleepModeController {
     private static int mRingerState;
     private static int mZenState;
 
+    private static int mExtraDarkMode;
+
     private static final String TAG = "SleepModeController";
     private static final int SLEEP_NOTIFICATION_ID = 727;
     public static final String SLEEP_MODE_TURN_OFF = "android.intent.action.SLEEP_MODE_TURN_OFF";
@@ -186,7 +188,7 @@ public class SleepModeController {
             mSensorPrivacyManager = (SensorPrivacyManager) mContext.getSystemService(Context.SENSOR_PRIVACY_SERVICE);
         }
         try {
-            return !mSensorPrivacyManager.isSensorPrivacyEnabled();
+            return !mSensorPrivacyManager.isAllSensorPrivacyEnabled();
         } catch (Exception e) {
             return false;
         }
@@ -197,7 +199,7 @@ public class SleepModeController {
             mSensorPrivacyManager = (SensorPrivacyManager) mContext.getSystemService(Context.SENSOR_PRIVACY_SERVICE);
         }
         try {
-            mSensorPrivacyManager.setSensorPrivacy(!enable);
+            mSensorPrivacyManager.setAllSensorPrivacy(!enable);
         } catch (Exception e) {
         }
     }
@@ -307,6 +309,16 @@ public class SleepModeController {
                     Settings.System.ARCANE_IDLE_MANAGER, 1);
         }
 
+        // Enable extra dark mode
+        boolean enableExtraDark = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.SLEEP_MODE_EXTRA_DARK_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
+        if (enableExtraDark) {
+            mExtraDarkMode = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                    Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 0, UserHandle.USER_CURRENT);
+            Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                    Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 1, UserHandle.USER_CURRENT);
+        }
+
         // Set Ringer mode (0: Off, 1: Vibrate, 2:DND: 3:Silent)
         int ringerMode = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.SLEEP_MODE_RINGER_MODE, 0, UserHandle.USER_CURRENT);
@@ -381,6 +393,15 @@ public class SleepModeController {
         if (enableIdleManager) {
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.ARCANE_IDLE_MANAGER, mIdleState);
+        }
+
+        // Disable Extra Dark mode battery
+        boolean enablExtraDark = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.SLEEP_MODE_EXTRA_DARK_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
+
+        if (enablExtraDark) {
+            Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                    Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, mExtraDarkMode, UserHandle.USER_CURRENT);
         }
 
         // Set Ringer mode (0: Off, 1: Vibrate, 2:DND: 3:Silent)
