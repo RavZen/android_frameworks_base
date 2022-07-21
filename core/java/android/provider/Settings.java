@@ -12047,6 +12047,12 @@ public final class Settings {
         public static final String SLEEP_MODE_AOD_TOGGLE = "sleep_mode_aod_toggle";
 
         /**
+         * Whether to enable Sensor block in Sleep Mode
+         * @hide
+         */
+        public static final String SLEEP_MODE_SENSOR_BLOCK_TOGGLE = "sleep_mode_sensor_block_toggle";
+
+        /**
          * Whether to enable Aggressive battery in Sleep Mode
          * @hide
          */
