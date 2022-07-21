@@ -56,7 +56,6 @@ public class SleepModeController {
     private NotificationManager mNotificationManager;
     private WifiManager mWifiManager;
     private LocationManager mLocationManager;
-    private SensorPrivacyManager mSensorPrivacyManager;
     private BluetoothAdapter mBluetoothAdapter;
     private int mSubscriptionId;
     private Toast mToast;
@@ -72,7 +71,7 @@ public class SleepModeController {
     private static int mIdleState;
     private static int mRingerState;
     private static int mZenState;
-
+    private static int mSensorBlockState;
     private static int mExtraDarkMode;
 
     private static final String TAG = "SleepModeController";
@@ -86,7 +85,6 @@ public class SleepModeController {
         mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mWifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
         mLocationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
-        mSensorPrivacyManager = (SensorPrivacyManager) mContext.getSystemService(Context.SENSOR_PRIVACY_SERVICE);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mSubscriptionId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mResources = mContext.getResources();
@@ -183,26 +181,6 @@ public class SleepModeController {
         }
     }
 
-    private boolean isSensorEnabled() {
-        if (mSensorPrivacyManager == null) {
-            mSensorPrivacyManager = (SensorPrivacyManager) mContext.getSystemService(Context.SENSOR_PRIVACY_SERVICE);
-        }
-        try {
-            return !mSensorPrivacyManager.isAllSensorPrivacyEnabled();
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    private void setSensorEnabled(boolean enable) {
-        if (mSensorPrivacyManager == null) {
-            mSensorPrivacyManager = (SensorPrivacyManager) mContext.getSystemService(Context.SENSOR_PRIVACY_SERVICE);
-        }
-        try {
-            mSensorPrivacyManager.setAllSensorPrivacy(!enable);
-        } catch (Exception e) {
-        }
-    }
 
     private int getZenMode() {
         if (mNotificationManager == null) {
@@ -281,14 +259,6 @@ public class SleepModeController {
             setLocationEnabled(false);
         }
 
-        // Disable Sensors
-        boolean disableSensors = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.SLEEP_MODE_SENSORS_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
-        if (disableSensors) {
-            mSensorState = isSensorEnabled();
-            setSensorEnabled(false);
-        }
-
         // Disable AOD
         boolean disableAOD = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.SLEEP_MODE_AOD_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
@@ -297,6 +267,16 @@ public class SleepModeController {
                     Settings.Secure.DOZE_ALWAYS_ON, 0, UserHandle.USER_CURRENT);
             Settings.Secure.putIntForUser(mContext.getContentResolver(),
                     Settings.Secure.DOZE_ALWAYS_ON, 0, UserHandle.USER_CURRENT);
+        }
+
+        // Enable Sensorblock
+        boolean enableSensorBlock = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.SLEEP_MODE_SENSOR_BLOCK_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
+        if (enableSensorBlock) {
+            mSensorBlockState = Settings.System.getIntForUser(mContext.getContentResolver(),
+                    Settings.System.SENSOR_BLOCK, 1, UserHandle.USER_CURRENT);
+            Settings.System.putIntForUser(mContext.getContentResolver(),
+                    Settings.System.SENSOR_BLOCK, 1, UserHandle.USER_CURRENT);
         }
 
         // Enable Aggressive battery
@@ -372,11 +352,12 @@ public class SleepModeController {
             setLocationEnabled(mLocationState);
         }
 
-        // Enable Sensors
-        boolean disableSensors = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.SLEEP_MODE_SENSORS_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
-        if (disableSensors && mSensorState != isSensorEnabled()) {
-            setSensorEnabled(mSensorState);
+        // Disable Sensorblock
+        boolean disableSensorBlock = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.SLEEP_MODE_SENSOR_BLOCK_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
+        if (disableSensorBlock) {
+            Settings.System.putIntForUser(mContext.getContentResolver(),
+                    Settings.System.SENSOR_BLOCK, mSensorBlockState, UserHandle.USER_CURRENT);
         }
 
         // Enable AOD
