@@ -52,6 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/keyguard_slice_view"
+        android:paddingBottom="30dp"
         android:visibility="gone">
         <com.android.keyguard.AnimatableClockView
             android:id="@+id/animatable_clock_view_large"
@@ -64,8 +65,8 @@
             android:typeface="monospace"
             android:elegantTextHeight="false"
             chargeAnimationDelay="200"
-            dozeWeight="200"
-            lockScreenWeight="400"
+            dozeWeight="350"
+            lockScreenWeight="500"
         />
     </FrameLayout>
 
