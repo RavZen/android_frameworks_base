@@ -6468,12 +6468,6 @@ public final class Settings {
         public static final String NAVIGATION_BAR_IME_SPACE = "navigation_bar_ime_space";
 
         /**
-         * Defines the screen-off animation to display
-         * @hide
-         */
-        public static final String SCREEN_OFF_ANIMATION = "screen_off_animation";
-
-        /**
          * Gesture navbar length mode.
          * Supported modes: 0 for normal length, 1 for medium and 2 for long.
          * Default 0.
