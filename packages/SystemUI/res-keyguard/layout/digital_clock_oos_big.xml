@@ -1,36 +1,24 @@
 <com.android.keyguard.clock.ClockLayout xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:aapt="http://schemas.android.com/aapt" android:layout_width="match_parent" android:layout_height="match_parent" android:paddingTop="178dp">
-    <RelativeLayout android:layout_gravity="center_horizontal" android:orientation="vertical" android:id="@+id/clock_view" android:layout_width="wrap_content" android:layout_height="wrap_content" >
-        <TextClock android:textSize="1dp" android:textColor="?attr/wallpaperTextColorAccent" android:ellipsize="none" android:layout_gravity="center" android:id="@+id/day" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="2dp" android:format12Hour="EEEE" android:format24Hour="EEEE"/>
-        <TextClock
-            android:letterSpacing="0.1"
-            android:ellipsize="none"
-            android:gravity="center_horizontal"
-            android:id="@+id/time_clock_accented"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:format12Hour="h"
-            android:textColor="?attr/wallpaperTextColorAccent"
-            android:textSize="212dp"
-            android:textStyle="bold"
-            android:shadowColor="@color/keyguard_shadow_color"
-            android:fontFeatureSettings="@*android:string/config_headlineFontFeatureSettings"
-            android:fontFamily="@*android:string/config_bodyFontFamilyLight"
-            android:format24Hour="kk" />
-        <TextClock
-            android:letterSpacing="0.1"
-            android:textSize="212dp"
-            android:gravity="center_horizontal"
-            android:id="@+id/minute_clock"
-            android:textStyle="normal"
-            android:textColor="?attr/wallpaperTextColorAccent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:format12Hour="mm"
-            android:format24Hour="mm"
-            android:paddingTop="198dp"/>
-        <TextClock android:textSize="1dp" android:textColor="?attr/wallpaperTextColorAccent" android:ellipsize="none" android:layout_gravity="center" android:id="@+id/timedate" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="0dp" android:format12Hour="dd MMMM" android:format24Hour="dd MMMM"/>
-    </RelativeLayout>
+xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt"
+android:layout_gravity="center" android:layout_width="match_parent" android:layout_height="match_parent" android:layoutDirection="ltr" android:paddingTop="182dp">
+    <LinearLayout android:layout_gravity="center_horizontal" android:orientation="vertical" android:id="@+id/clock_view" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layoutDirection="ltr">
+        <TextClock android:textSize="0dp" android:textColor="?attr/wallpaperTextColorAccent" android:ellipsize="none" android:layout_gravity="center" android:id="@+id/day" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="2dp" android:format12Hour="EEEE" android:format24Hour="EEEE"/>
+        <TextClock android:textSize="182dp"
+        android:textColor="?attr/wallpaperTextColorAccent"
+        android:ellipsize="none"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center"
+        android:id="@+id/time_clock_accented"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="24dp"
+        android:format12Hour="hh"
+        android:format24Hour="kk"
+        android:typeface="monospace"
+        android:fontFamily="@*android:string/config_bodyFontFamily"
+        android:elegantTextHeight="false"
+        android:fontFeatureSettings="tnum, cv03, cv04" android:textFontWeight="100" />
+        <TextClock android:textSize="182dp" android:layout_marginTop="-80dp"  android:textColor="?attr/wallpaperTextColorAccent" android:ellipsize="none" android:layout_gravity="center" android:id="@+id/minute_clock" android:layout_width="wrap_content" android:layout_height="wrap_content" android:format12Hour="mm" android:format24Hour="mm" android:typeface="monospace" android:fontFamily="@*android:string/config_bodyFontFamily" android:elegantTextHeight="false" android:fontFeatureSettings="tnum, cv03, cv04" android:textFontWeight="100" />
+        <TextClock android:textSize="0dp" android:textColor="?attr/wallpaperTextColorAccent" android:ellipsize="none" android:layout_gravity="center" android:id="@+id/timedate"  android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="0dp" android:format12Hour="dd MMMM" android:format24Hour="dd MMMM"/>
+    </LinearLayout>
 </com.android.keyguard.clock.ClockLayout>
