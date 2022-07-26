@@ -147,6 +147,9 @@
     <protected-broadcast android:name="android.app.backup.intent.CLEAR" />
     <protected-broadcast android:name="android.app.backup.intent.INIT" />
 
+    <!-- Sleep Mode -->
+    <protected-broadcast android:name="android.intent.action.SLEEP_MODE_TURN_OFF" />
+
     <protected-broadcast android:name="android.bluetooth.intent.DISCOVERABLE_TIMEOUT" />
     <protected-broadcast android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
     <protected-broadcast android:name="android.bluetooth.adapter.action.SCAN_MODE_CHANGED" />

@@ -73,6 +73,7 @@ import com.android.systemui.qs.tiles.VpnTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.qs.tiles.WorkModeTile;
 import com.android.systemui.qs.tiles.DataSwitchTile;
+import com.android.systemui.qs.tiles.SleepModeTile;
 import com.android.systemui.util.leak.GarbageMonitor;
 import com.android.systemui.qs.tiles.CaffeineTile;
 import com.android.systemui.qs.tiles.AmbientDisplayTile;
@@ -140,6 +141,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<RefreshRateTile> mRefreshRateTileProvider;
     private final Provider<QRCodeTile> mQRCodeTileProvider;
     private final Provider<MonoToggleTile> mMonoToggleTileProvider;
+    private final Provider<SleepModeTile> mSleepModeTileProvider;
 
     private final Lazy<QSHost> mQsHostLazy;
     private final Provider<CustomTile.Builder> mCustomTileBuilderProvider;
@@ -199,7 +201,8 @@ public class QSFactoryImpl implements QSFactory {
             Provider<PowerShareTile> powerShareTileProvider,
             Provider<RefreshRateTile> refreshRateTileProvider,
             Provider<QRCodeTile> qrCodeTileProvider,
-            Provider<MonoToggleTile> monoToggleTileProvider) {
+            Provider<MonoToggleTile> monoToggleTileProvider,
+            Provider<SleepModeTile> sleepModeTileProvider) {
         mQsHostLazy = qsHostLazy;
         mCustomTileBuilderProvider = customTileBuilderProvider;
 
@@ -255,6 +258,7 @@ public class QSFactoryImpl implements QSFactory {
         mRefreshRateTileProvider = refreshRateTileProvider;
         mQRCodeTileProvider = qrCodeTileProvider;
         mMonoToggleTileProvider = monoToggleTileProvider;
+        mSleepModeTileProvider = sleepModeTileProvider;
     }
 
     public QSTile createTile(String tileSpec) {
@@ -371,6 +375,9 @@ public class QSFactoryImpl implements QSFactory {
                 return mQRCodeTileProvider.get();
             case "mono":
                 return mMonoToggleTileProvider.get();
+            case "sleep_mode":
+                return mSleepModeTileProvider.get();
+
         }
         // Custom tiles
         if (tileSpec.startsWith(CustomTile.PREFIX)) {

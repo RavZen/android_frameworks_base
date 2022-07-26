@@ -2309,4 +2309,12 @@
     <string name="view_and_control_notification_content" msgid="8003766498562604034">"<xliff:g id="SERVICE_NAME">%s</xliff:g> kann deinen Bildschirm sehen und steuern. Zum Prüfen tippen."</string>
     <string name="ui_translation_accessibility_translated_text" msgid="3197547218178944544">"„<xliff:g id="MESSAGE">%1$s</xliff:g>“ wurde übersetzt."</string>
     <string name="ui_translation_accessibility_translation_finished" msgid="3057830947610088465">"Nachricht wurde von <xliff:g id="FROM_LANGUAGE">%1$s</xliff:g> auf <xliff:g id="TO_LANGUAGE">%2$s</xliff:g> übersetzt."</string>
+
+        <!-- Schlafmodus -->
+    <string name="notification_channel_sleep">Schlafmodus</string>
+    <string name="sleep_mode_notification_title">Schlafmodus aktiviert</string>
+    <string name="sleep_mode_notification_content">Tippen Sie, um den Schlafmodus auszuschalten</string>
+    <string name="sleep_mode_enabled_toast">Schlafmodus einschalten</string>
+    <string name="sleep_mode_disabled_toast">Schlafmodus ausgeschaltet</string>
+
 </resources>

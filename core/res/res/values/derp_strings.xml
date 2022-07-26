@@ -74,4 +74,11 @@
 
     <!-- Vendor mismatch fingerprint warning [CHAR LIMIT=NONE] -->
     <string name="system_error_vendorprint">Your vendor image does not match the system. Please flash the <xliff:g id="string">%s</xliff:g> vendor image for your device</string>
+
+     <!-- Sleep Mode -->
+    <string name="notification_channel_sleep">Sleep Mode</string>
+    <string name="sleep_mode_notification_title">Sleep mode enabled</string>
+    <string name="sleep_mode_notification_content">Tap to turn off sleep mode</string>
+    <string name="sleep_mode_enabled_toast">Sleep mode turned on</string>
+    <string name="sleep_mode_disabled_toast">Sleep mode turned off</string>
 </resources>
