@@ -4767,7 +4767,7 @@ public class NotificationPanelViewController extends PanelViewController {
 
     private void updateReticker() {
         mReTickerStatus = Settings.System.getIntForUser(mView.getContext().getContentResolver(),
-                Settings.System.RETICKER_STATUS, 0, UserHandle.USER_CURRENT) != 0;
+                Settings.System.RETICKER_STATUS, 1, UserHandle.USER_CURRENT) != 0;
         mReTickerColored = Settings.System.getIntForUser(mView.getContext().getContentResolver(),
                 Settings.System.RETICKER_COLORED, 0, UserHandle.USER_CURRENT) != 0;
         mReTickerLandscapeOnly = Settings.System.getIntForUser(mView.getContext().getContentResolver(),

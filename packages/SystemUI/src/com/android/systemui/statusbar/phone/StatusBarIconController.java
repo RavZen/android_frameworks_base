@@ -536,7 +536,7 @@ public interface StatusBarIconController {
 
         private boolean useOldStyleMobileDataIcons() {
             return Settings.System.getIntForUser(mContext.getContentResolver(),
-                    Settings.System.USE_OLD_MOBILETYPE, 0,
+                    Settings.System.USE_OLD_MOBILETYPE, 1,
                     UserHandle.USER_CURRENT) != 0;
         }
 
