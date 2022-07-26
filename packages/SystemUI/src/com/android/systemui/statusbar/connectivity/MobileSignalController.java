@@ -131,7 +131,7 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
     private boolean mRoamingIconAllowed;
 
     // VoLTE Icon Style
-    private int mVoLTEicon = 0;
+    private int mVoLTEicon = 3;
     // VoWiFi Icon Style
     private int mVoWIFIicon = 0;
     private boolean mOverride = true;
@@ -353,7 +353,7 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
                 Settings.System.ROAMING_INDICATOR_ICON, 1,
                 UserHandle.USER_CURRENT) == 1;
 		mVoLTEicon = Settings.System.getIntForUser(resolver,
-                Settings.System.VOLTE_ICON_STYLE, 0,
+                Settings.System.VOLTE_ICON_STYLE, 3,
                 UserHandle.USER_CURRENT);
         mOverride = Settings.System.getIntForUser(resolver,
                 Settings.System.VOLTE_VOWIFI_OVERRIDE, 1,
