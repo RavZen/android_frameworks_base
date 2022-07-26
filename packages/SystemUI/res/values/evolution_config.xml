@@ -97,7 +97,7 @@
     <integer name="config_battCurrentDivider" translatable="false">1000</integer>
 
     <!-- Preferred max refresh rate at AOD & Ambient Display, if supported by the display. -->
-    <integer name="config_aodMaxRefreshRate">-1</integer>
+    <integer name="config_aodMaxRefreshRate">60</integer>
 
     <!-- Doze: does the double tap sensor need a proximity check? -->
     <bool name="doze_double_tap_proximity_check">false</bool>
