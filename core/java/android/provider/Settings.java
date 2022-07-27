@@ -6151,20 +6151,6 @@ public final class Settings {
         public static final String MUSIC_TILE_TITLE = "music_tile_title";
 
         /**
-         * Whether to show qs footer text
-         * @hide
-         */
-        @Readable
-        public static final String QS_FOOTER_TEXT_SHOW = "qs_footer_text_show";
-
-        /**
-         * QS footer text
-         * @hide
-         */
-        @Readable
-        public static final String QS_FOOTER_TEXT_STRING = "qs_footer_text_string";
-
-        /**
          * Whether to show qs footer Running Services icon
          * @hide
          */
@@ -6527,12 +6513,6 @@ public final class Settings {
          * @hide
          */
         public static final String NOTIFICATION_MATERIAL_DISMISS_BGSTYLE = "notification_material_dismiss_bgstyle";
-
-        /**
-         * Whether to show data usage in qs footer
-         * @hide
-         */
-        public static final String QS_FOOTER_DATA_USAGE = "qs_footer_data_usage";
 
         /**
          * Whether to enable taskbar.
