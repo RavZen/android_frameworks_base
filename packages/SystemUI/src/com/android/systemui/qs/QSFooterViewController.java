@@ -43,7 +43,6 @@ public class QSFooterViewController extends ViewController<QSFooterView> impleme
     private final QSPanelController mQsPanelController;
     private final QuickQSPanelController mQuickQSPanelController;
     private final FooterActionsController mFooterActionsController;
-    private final TextView mBuildText;
     private final PageIndicator mPageIndicator;
 
     @Inject
@@ -58,7 +57,6 @@ public class QSFooterViewController extends ViewController<QSFooterView> impleme
         mQuickQSPanelController = quickQSPanelController;
         mFooterActionsController = footerActionsController;
 
-        mBuildText = mView.findViewById(R.id.build);
         mPageIndicator = mView.findViewById(R.id.footer_page_indicator);
     }
 

@@ -6258,6 +6258,12 @@ public final class Settings {
         public static final String AMBIENT_BATTERY_PERCENT = "ambient_battery_percent";
 
         /**
+         * Whether to show data usage in qs footer
+         * @hide
+         */
+        public static final String QS_FOOTER_DATA_USAGE = "qs_footer_data_usage";
+
+        /**
          * @hide
          */
         public static final String OMNI_NAVIGATION_BAR_SHOW = "navbar_visibility";
