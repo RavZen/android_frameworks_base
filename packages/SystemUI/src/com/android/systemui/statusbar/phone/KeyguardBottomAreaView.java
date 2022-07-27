@@ -76,6 +76,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import android.os.UserHandle;
+import android.provider.Settings;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.util.derp.udfps.UdfpsUtils;
 import com.android.internal.widget.LockPatternUtils;
@@ -141,8 +143,8 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
     private static final int DOZE_ANIMATION_ELEMENT_DURATION = 250;
 
     // TODO(b/179494051): May no longer be needed
-    private final boolean mShowLeftAffordance = true;
-    private final boolean mShowCameraAffordance = true;
+    private boolean mShowLeftAffordance = true;
+    private boolean mShowCameraAffordance = true;
 
     private KeyguardAffordanceView mRightAffordanceView;
     private KeyguardAffordanceView mLeftAffordanceView;
@@ -242,10 +244,12 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
     public KeyguardBottomAreaView(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        // we ignore both of those cause we allow config of shortcuts
-        //mShowLeftAffordance = getResources().getBoolean(R.bool.config_keyguardShowLeftAffordance);
-        //mShowCameraAffordance = getResources()
-        //        .getBoolean(R.bool.config_keyguardShowCameraAffordance);
+
+        mShowLeftAffordance = Settings.System.getIntForUser(context.getContentResolver(),
+            Settings.System.LOCKSCREEN_SHOW_VOICE_SHORTCUT, 0, UserHandle.USER_CURRENT) == 1;
+
+        mShowCameraAffordance = Settings.System.getIntForUser(context.getContentResolver(),
+            Settings.System.LOCKSCREEN_SHOW_CAMERA_SHORTCUT, 0, UserHandle.USER_CURRENT) == 1;
     }
 
     private AccessibilityDelegate mAccessibilityDelegate = new AccessibilityDelegate() {
@@ -256,7 +260,7 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
             if (host == mRightAffordanceView) {
                 label = getResources().getString(R.string.camera_label);
             } else if (host == mLeftAffordanceView) {
-                if (mLeftIsVoiceAssist) {
+                if (mLeftIsVoiceAssist && !isLeftPhoneEnabled()) {
                     label = getResources().getString(R.string.voice_assist_label);
                 } else {
                     label = getResources().getString(R.string.phone_label);
@@ -596,6 +600,11 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         return mLeftIsVoiceAssist;
     }
 
+    public boolean isLeftPhoneEnabled() {
+        return  Settings.System.getIntForUser(mContext.getContentResolver(),
+        Settings.System.LOCKSCREEN_SHOW_LEFT_PHONE_SHORTCUT, 0, UserHandle.USER_CURRENT) == 1;
+    }
+
     private boolean isPhoneVisible() {
         PackageManager pm = mContext.getPackageManager();
         return pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY)
@@ -746,10 +755,7 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
     }
 
     public void launchLeftAffordance() {
-        Intent leftButtonIntent = mLeftButton.getIntent();
-        if (leftButtonIntent != null && leftButtonIntent != PHONE_INTENT) {
-            mActivityStarter.startActivity(mLeftButton.getIntent(), false /* dismissShade */);
-        } else if (mLeftIsVoiceAssist) {
+        if (mLeftIsVoiceAssist && !isLeftPhoneEnabled()) {
             launchVoiceAssist();
         } else {
             launchPhone();
@@ -874,7 +880,7 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
             mPreviewContainer.removeView(previewBefore);
         }
 
-        if (mLeftIsVoiceAssist) {
+        if (mLeftIsVoiceAssist && !isLeftPhoneEnabled()) {
             if (Dependency.get(AssistManager.class).getVoiceInteractorComponentName() != null) {
                 mLeftPreview = mPreviewInflater.inflatePreviewFromService(
                         Dependency.get(AssistManager.class).getVoiceInteractorComponentName());
@@ -1039,8 +1045,8 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         @Override
         public IconState getIcon() {
             mLeftIsVoiceAssist = canLaunchVoiceAssist();
-            if (mLeftIsVoiceAssist) {
-                mIconState.isVisible = mUserSetupComplete && mShowLeftAffordance && !hideShortcuts();
+            if (mLeftIsVoiceAssist && !isLeftPhoneEnabled()) {
+                mIconState.isVisible = mUserSetupComplete && mShowLeftAffordance;
                 if (mLeftAssistIcon == null) {
                     mIconState.drawable = mContext.getDrawable(R.drawable.ic_mic_26dp);
                 } else {
