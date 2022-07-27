@@ -362,7 +362,7 @@ public class SleepModeController {
     private void addNotification() {
         Intent intent = new Intent(SLEEP_MODE_TURN_OFF);
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND | Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 
         // Display a notification
         Notification.Builder builder = new Notification.Builder(mContext, SystemNotificationChannels.SLEEP)
