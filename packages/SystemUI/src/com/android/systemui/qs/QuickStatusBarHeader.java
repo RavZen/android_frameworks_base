@@ -48,6 +48,11 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.provider.Settings;
+import java.util.Timer;
+import java.util.TimerTask;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.BroadcastReceiver;
 
 import androidx.annotation.NonNull;
 
@@ -129,6 +134,8 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
     private int mTextColorPrimary = Color.TRANSPARENT;
     private int mTopViewMeasureHeight;
 
+    private Timer mTimer;
+
     @NonNull
     private List<String> mRssiIgnoredSlots;
     private boolean mIsSingleCarrier;
@@ -138,6 +145,8 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
     private final Vibrator mVibrator;
 
     private int mStatusBarBatteryStyle, mQSBatteryStyle, mQSBatteryLocation;
+
+    private boolean mScreenOn = true;
 
     public QuickStatusBarHeader(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -219,12 +228,41 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
         int fillColor = Utils.getColorAttrDefaultColor(getContext(),
                 android.R.attr.textColorPrimary);
 
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_SCREEN_ON);
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+
         // Set the correct tint for the status icons so they contrast
         iconManager.setTint(fillColor);
 
         mQSExpansionPathInterpolator = qsExpansionPathInterpolator;
         updateAnimators();
     }
+
+     private final BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // If the handler is null, it means we received a broadcast while the view has not
+            // finished being attached or in the process of being detached.
+            // In that case, do not post anything.
+            Handler handler = getHandler();
+            if (handler == null) return;
+
+            String action = intent.getAction();
+            if (action.equals(Intent.ACTION_SCREEN_ON)) {
+                mScreenOn = true;
+            } else if (action.equals(Intent.ACTION_SCREEN_OFF)) {
+                mScreenOn = false;
+            }
+            if (!mScreenOn) {
+                if(mTimer != null) {
+                   mTimer.cancel();
+                   mTimer.purge();
+                   mTimer = null;
+                }
+            }
+        }
+    };
 
     void setIsSingleCarrier(boolean isSingleCarrier) {
         mIsSingleCarrier = isSingleCarrier;
@@ -519,6 +557,9 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
         if (keyguardExpansionFraction == 1f && mBatteryRemainingIcon != null) {
             mBatteryRemainingIcon.setClickable(true);
         }
+
+        updateCarrierLabelVisibility();
+
         // If forceExpanded (we are opening QS from lockscreen), the animators have been set to
         // position = 1f.
         if (forceExpanded) {
@@ -528,6 +569,25 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
         }
 
         mKeyguardExpansionFraction = keyguardExpansionFraction;
+    }
+
+    private void updateCarrierLabelVisibility() {
+         if (mTimer == null) {
+            mTimer = new Timer();
+        }
+        mTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                final Handler mUiHandler = new Handler(Looper.getMainLooper());
+                mUiHandler.post(() -> {
+                  if(mPrivacyChip.getVisibility() == View.VISIBLE) {
+                    mQSCarriers.setVisibility(View.GONE);
+                  } else {
+                    mQSCarriers.setVisibility(View.VISIBLE);
+                  }
+                });
+            }
+        }, 0, 500);
     }
 
     public void disable(int state1, int state2, boolean animate) {
