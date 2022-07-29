@@ -16,11 +16,6 @@ package com.android.systemui.qs;
 
 import static android.app.StatusBarManager.DISABLE2_QUICK_SETTINGS;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-import static com.android.systemui.battery.BatteryMeterView.BATTERY_STYLE_CIRCLE;
-import static com.android.systemui.battery.BatteryMeterView.BATTERY_STYLE_DOTTED_CIRCLE;
-import static com.android.systemui.battery.BatteryMeterView.BATTERY_STYLE_FULL_CIRCLE;
-import static com.android.systemui.battery.BatteryMeterView.BATTERY_STYLE_BIG_CIRCLE;
-import static com.android.systemui.battery.BatteryMeterView.BATTERY_STYLE_BIG_DOTTED_CIRCLE;
 
 import android.content.Context;
 import android.content.Intent;
@@ -171,7 +166,6 @@ public class QuickStatusBarHeader extends FrameLayout implements
         setSecurityHeaderContainerVisibility(
                 config.orientation == Configuration.ORIENTATION_LANDSCAPE);
 
-        mBatteryRemainingIcon.setIsQsHeader(true);
         // QS will always show the estimate, and BatteryMeterView handles the case where
         // it's unavailable or charging
         mBatteryRemainingIcon.setPercentShowMode(BatteryMeterView.MODE_ESTIMATE);
@@ -333,15 +327,6 @@ public class QuickStatusBarHeader extends FrameLayout implements
             mClockView.setTextColor(textColor);
             if (mTintedIconManager != null) {
                 mTintedIconManager.setTint(textColor);
-            }
-            final int batteryStyle = mBatteryRemainingIcon.getBatteryStyle();
-            if (batteryStyle == BATTERY_STYLE_CIRCLE
-                    || batteryStyle == BATTERY_STYLE_DOTTED_CIRCLE
-                    || batteryStyle == BATTERY_STYLE_FULL_CIRCLE
-                    || batteryStyle == BATTERY_STYLE_BIG_CIRCLE
-                    || batteryStyle == BATTERY_STYLE_BIG_DOTTED_CIRCLE) {
-                textColorSecondary = Utils.getColorAttrDefaultColor(mContext,
-                        android.R.attr.textColorHint);
             }
             mBatteryRemainingIcon.updateColors(mTextColorPrimary, textColorSecondary,
                     mTextColorPrimary);
