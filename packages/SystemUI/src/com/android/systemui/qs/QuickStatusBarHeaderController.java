@@ -98,13 +98,6 @@ class QuickStatusBarHeaderController extends ViewController<QuickStatusBarHeader
 
         mIconManager = new StatusBarIconController.TintedIconManager(mIconContainer, featureFlags);
         mDemoModeReceiver = new ClockDemoModeReceiver(mClockView);
-        mColorExtractor = colorExtractor;
-        mOnColorsChangedListener = (extractor, which) -> {
-            final boolean lightTheme = mColorExtractor.getNeutralColors().supportsDarkText();
-            mClockView.onColorsChanged(lightTheme);
-        };
-        mColorExtractor.addOnColorsChangedListener(mOnColorsChangedListener);
-
     }
 
     @Override
