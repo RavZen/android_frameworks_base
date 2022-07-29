@@ -390,6 +390,6 @@ class AuthRippleController @Inject constructor(
     }
 
     companion object {
-        const val RIPPLE_ANIMATION_DURATION: Long = 1533
+        const val RIPPLE_ANIMATION_DURATION: Long = 1050
     }
 }
