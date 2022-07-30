@@ -46,8 +46,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="8dp"
             android:background="@drawable/qs_alike_top"
-            android:layout_width="24dp"
-            android:layout_height="24dp"/>
+            android:layout_width="28dp"
+            android:layout_height="28dp"/>
         <TextView
             android:id="@+id/ticker_content"
             android:layout_marginLeft="8dp"
@@ -61,6 +61,7 @@
             android:scrollHorizontally="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/reticker_text_color"
             android:textAppearance="@style/TextAppearance.Notifications.reTicker"/>
     </LinearLayout>
 
