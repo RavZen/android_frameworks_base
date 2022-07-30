@@ -6440,6 +6440,12 @@ public final class Settings {
         public static final String SEEK_BAR_BATTERY_CHARGE_LEVEL_SOUND = "battery_level_charge_seek_bar";
 
         /**
+         * Whether to display QS date
+         * @hide
+         */
+        public static final String SHOW_QS_DATE = "show_qs_date";
+
+        /**
          * @hide
          */
         public static final String LOCK_HIDE_STATUS_BAR = "lockscreen_hide_status_bar";
