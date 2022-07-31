@@ -83,6 +83,7 @@ class FingerprintAuthenticationClient extends AuthenticationClient<ISession> imp
         mALSProbeCallback = createALSCallback(false /* startWithClient */);
     }
 
+
     @Override
     public void start(@NonNull Callback callback) {
         super.start(callback);
@@ -147,6 +148,7 @@ class FingerprintAuthenticationClient extends AuthenticationClient<ISession> imp
         }
 
         mSensorOverlays.hide(getSensorId());
+        startHalOperation();
     }
 
     @Override
