@@ -470,6 +470,7 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
                 .addFloat(mSecurityHeaderView, "alpha", 0, 1)
                 // These views appear on expanding down
                 .addFloat(mDateView, "alpha", 0, 0, 1)
+                .addFloat(mDateContainer, "alpha", 0, 0, 1)
                 .addFloat(mClockDateView, "alpha", 1, 0, 0)
                 .addFloat(mQSCarriers, "alpha", 0, 1)
                 .setListener(new TouchAnimator.ListenerAdapter() {
@@ -537,7 +538,7 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
         if (mExpanded == expanded) return;
         mExpanded = expanded;
         quickQSPanelController.setExpanded(expanded);
-	    mDateView.setVisibility(mClockView.isClockDateEnabled() ? View.INVISIBLE : View.VISIBLE);
+	    mDateView.setVisibility(View.VISIBLE);
         updateEverything();
     }
 
@@ -790,7 +791,6 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
                 mShowDate =
                         TunerService.parseIntegerSwitch(newValue, true);
                 mDateContainer.setVisibility(mShowDate ? View.VISIBLE : View.GONE);
-                mClockDateView.setVisibility(mShowDate ? View.VISIBLE : View.GONE);
                 break;
             default:
                 break;
