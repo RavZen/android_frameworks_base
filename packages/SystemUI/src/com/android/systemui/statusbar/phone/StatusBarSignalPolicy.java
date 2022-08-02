@@ -256,7 +256,7 @@ public class StatusBarSignalPolicy implements SignalCallback,
             state.callStrengthResId = statusIcon.icon;
             state.callStrengthDescription = statusIcon.contentDescription;
         }
-        boolean hideCallStrength = mTunerService.getValue(HIDE_QS_CALL_STRENGTH, 1) == 0;
+        boolean hideCallStrength = mTunerService.getValue(HIDE_QS_CALL_STRENGTH, 1) == 1;
         if (mCarrierConfigTracker.getCallStrengthConfig(subId) && !hideCallStrength) {
             mIconController.setCallStrengthIcons(mSlotCallStrength,
                     CallIndicatorIconState.copyStates(mCallIndicatorStates));
