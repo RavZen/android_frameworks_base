@@ -1501,5 +1501,6 @@ please see styles_device_defaults.xml.
       <item name="textColor">#555555</item>
     </style>
 
+    <java-symbol type="bool" name="config_supportGloveMode" />
 
 </resources>
