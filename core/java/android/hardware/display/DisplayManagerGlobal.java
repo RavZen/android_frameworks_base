@@ -399,9 +399,8 @@ public final class DisplayManagerGlobal {
             }
 
             final int numListeners = mDisplayListeners.size();
-            DisplayInfo info = getDisplayInfo(displayId);
             for (int i = 0; i < numListeners; i++) {
-                mDisplayListeners.get(i).sendDisplayEvent(displayId, event, info);
+                mDisplayListeners.get(i).sendDisplayEvent(displayId, event);
             }
             if (event == EVENT_DISPLAY_CHANGED && mDispatchNativeCallbacks) {
                 // Choreographer only supports a single display, so only dispatch refresh rate
@@ -943,8 +942,6 @@ public final class DisplayManagerGlobal {
         public final DisplayListener mListener;
         public long mEventsMask;
 
-        private final DisplayInfo mDisplayInfo = new DisplayInfo();
-
         DisplayListenerDelegate(DisplayListener listener, @NonNull Looper looper,
                 @EventsMask long eventsMask) {
             super(looper, null, true /*async*/);
@@ -952,8 +949,8 @@ public final class DisplayManagerGlobal {
             mEventsMask = eventsMask;
         }
 
-        public void sendDisplayEvent(int displayId, @DisplayEvent int event, DisplayInfo info) {
-            Message msg = obtainMessage(event, displayId, 0, info);
+        public void sendDisplayEvent(int displayId, @DisplayEvent int event) {
+            Message msg = obtainMessage(event, displayId, 0);
             sendMessage(msg);
         }
 
@@ -975,11 +972,7 @@ public final class DisplayManagerGlobal {
                     break;
                 case EVENT_DISPLAY_CHANGED:
                     if ((mEventsMask & DisplayManager.EVENT_FLAG_DISPLAY_CHANGED) != 0) {
-                        DisplayInfo newInfo = (DisplayInfo) msg.obj;
-                        if (newInfo != null && !newInfo.equals(mDisplayInfo)) {
-                            mDisplayInfo.copyFrom(newInfo);
-                            mListener.onDisplayChanged(msg.arg1);
-                        }
+                        mListener.onDisplayChanged(msg.arg1);
                     }
                     break;
                 case EVENT_DISPLAY_BRIGHTNESS_CHANGED:
