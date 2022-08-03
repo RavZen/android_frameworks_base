@@ -6425,7 +6425,6 @@ public final class Settings {
          * Whether to Enable wp zoom
          * @hide
          */
-        public static final String DISABLE_WP_ZOOM = "disable_wp_zoom";
 
         /**
          * Whether to enable charge battery warning

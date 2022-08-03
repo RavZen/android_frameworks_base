@@ -48,10 +48,6 @@ import android.view.SurfaceControl;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 
-import android.os.UserHandle;
-import android.provider.Settings;
-import android.content.ContentResolver;
-import android.content.Context;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.protolog.ProtoLogImpl;
 import com.android.internal.protolog.common.ProtoLog;
@@ -115,7 +111,6 @@ class WallpaperController {
     private int mWallpaperDrawState = WALLPAPER_DRAW_NORMAL;
 
     private boolean mShouldUpdateZoom;
-    boolean mUseWpZoom;
 
     /**
      * Temporary storage for taking a screenshot of the wallpaper.
@@ -229,15 +224,8 @@ class WallpaperController {
     WallpaperController(WindowManagerService service, DisplayContent displayContent) {
         mService = service;
         mDisplayContent = displayContent;
-        mUseWpZoom = Settings.System.getIntForUser(service.mContext.getContentResolver(),
-                Settings.System.DISABLE_WP_ZOOM, 0, UserHandle.USER_CURRENT) == 1;
-        if (mUseWpZoom) {
-        mMaxWallpaperScale = service.mContext.getResources()
-                .getFloat(com.android.internal.R.dimen.config_wallpaperMaxScaleDisabled);
-        } else {
         mMaxWallpaperScale = service.mContext.getResources()
                 .getFloat(com.android.internal.R.dimen.config_wallpaperMaxScale);
-        }
     }
 
     WindowState getWallpaperTarget() {

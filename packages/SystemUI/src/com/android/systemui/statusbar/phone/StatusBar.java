@@ -1360,21 +1360,8 @@ public class StatusBar extends SystemUI implements
         BackDropView backdrop = mNotificationShadeWindowView.findViewById(R.id.backdrop);
         mMediaManager.setup(backdrop, backdrop.findViewById(R.id.backdrop_front),
                 backdrop.findViewById(R.id.backdrop_back), mScrimController, mLockscreenWallpaper);
-        boolean mUseWpZoom = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.DISABLE_WP_ZOOM, 0, UserHandle.USER_CURRENT) == 1;
-        final float maxWallpaperZoom = mContext.getResources().getFloat(
+        float maxWallpaperZoom = mContext.getResources().getFloat(
                 com.android.internal.R.dimen.config_wallpaperMaxScale);
-        final float maxWallpaperZoomDisabled = mContext.getResources().getFloat(
-                com.android.internal.R.dimen.config_wallpaperMaxScaleDisabled);
-        if (mUseWpZoom) {
-        mNotificationShadeDepthControllerLazy.get().addListener(depth -> {
-            float scale = MathUtils.lerp(maxWallpaperZoomDisabled, 1f, depth);
-            backdrop.setPivotX(backdrop.getWidth() / 2f);
-            backdrop.setPivotY(backdrop.getHeight() / 2f);
-            backdrop.setScaleX(scale);
-            backdrop.setScaleY(scale);
-        });
-        } else {
         mNotificationShadeDepthControllerLazy.get().addListener(depth -> {
             float scale = MathUtils.lerp(maxWallpaperZoom, 1f, depth);
             backdrop.setPivotX(backdrop.getWidth() / 2f);
@@ -1382,7 +1369,6 @@ public class StatusBar extends SystemUI implements
             backdrop.setScaleX(scale);
             backdrop.setScaleY(scale);
         });
-        }
 
         mNotificationPanelViewController.setUserSetupComplete(mUserSetup);
 
