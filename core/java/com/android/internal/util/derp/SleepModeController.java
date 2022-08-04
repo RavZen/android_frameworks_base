@@ -66,12 +66,10 @@ public class SleepModeController {
     private static boolean mLocationState;
     private static boolean mCellularState;
     private static boolean mBluetoothState;
-    private static boolean mSensorState;
     private static int mAODState;
     private static int mIdleState;
     private static int mRingerState;
     private static int mZenState;
-    private static int mSensorBlockState;
     private static int mExtraDarkMode;
 
     private static int mAlarmBlockerState;
@@ -272,16 +270,6 @@ public class SleepModeController {
                     Settings.Secure.DOZE_ALWAYS_ON, 0, UserHandle.USER_CURRENT);
         }
 
-        // Enable Sensorblock
-        boolean enableSensorBlock = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.SLEEP_MODE_SENSOR_BLOCK_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
-        if (enableSensorBlock) {
-            mSensorBlockState = Settings.System.getIntForUser(mContext.getContentResolver(),
-                    Settings.System.SENSOR_BLOCK, 1, UserHandle.USER_CURRENT);
-            Settings.System.putIntForUser(mContext.getContentResolver(),
-                    Settings.System.SENSOR_BLOCK, 1, UserHandle.USER_CURRENT);
-        }
-
         // Enable Aggressive battery
         boolean enableIdleManager = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.SLEEP_MODE_AGGRESSIVE_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
@@ -373,14 +361,6 @@ public class SleepModeController {
                 Settings.Secure.SLEEP_MODE_LOCATION_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
         if (disableLocation && mLocationState != isLocationEnabled()) {
             setLocationEnabled(mLocationState);
-        }
-
-        // Disable Sensorblock
-        boolean disableSensorBlock = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.SLEEP_MODE_SENSOR_BLOCK_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
-        if (disableSensorBlock) {
-            Settings.System.putIntForUser(mContext.getContentResolver(),
-                    Settings.System.SENSOR_BLOCK, mSensorBlockState, UserHandle.USER_CURRENT);
         }
 
         // Enable AOD
