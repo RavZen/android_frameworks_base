@@ -66,7 +66,7 @@
             android:elegantTextHeight="false"
             android:paddingBottom="78dp"
             chargeAnimationDelay="200"
-            dozeWeight="400"
+            dozeWeight="380"
             lockScreenWeight="500"
         />
     </FrameLayout>
