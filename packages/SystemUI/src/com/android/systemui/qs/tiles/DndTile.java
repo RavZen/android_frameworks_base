@@ -210,7 +210,7 @@ public class DndTile extends QSTileImpl<BooleanState> {
     }
 
     private Dialog makeZenModeDialog() {
-        AlertDialog dialog = new EnableZenModeDialog(mContext, R.style.Theme_SystemUI_Dialog,
+        AlertDialog dialog = new EnableZenModeDialog(mContext, R.style.Theme_SystemUI_Dialog_GlobalActions,
                 true /* cancelIsNeutral */).createDialog();
         SystemUIDialog.applyFlags(dialog);
         SystemUIDialog.setShowForAllUsers(dialog, true);
