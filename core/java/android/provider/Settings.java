@@ -6136,11 +6136,6 @@ public final class Settings {
         @Readable
         public static final String QS_RUNNING_SERVICES_TOGGLE = "qs_running_services_toggle";
 
-        /**
-         * Use doubletap as doze pulse triggers
-         * @hide
-         */
-        public static final String DOZE_TRIGGER_DOUBLETAP = "doze_trigger_doubletap";
 
         /**
          * Whether to hide navbar pill and keyboard space.
