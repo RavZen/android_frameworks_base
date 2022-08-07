@@ -374,10 +374,12 @@ public class QuickStatusBarHeader extends FrameLayout {
 
     void setChipVisibility(boolean visibility) {
         if (visibility) {
+            mQSCarriers.setVisibility(View.GONE);
             // Animates the icons and battery indicator from alpha 0 to 1, when the chip is visible
             mIconsAlphaAnimator = mIconsAlphaAnimatorFixed;
             mIconsAlphaAnimator.setPosition(mKeyguardExpansionFraction);
         } else {
+            mQSCarriers.setVisibility(View.VISIBLE);
             mIconsAlphaAnimator = null;
             mIconContainer.setAlpha(1);
             mBatteryRemainingIcon.setAlpha(1);
