@@ -16,37 +16,45 @@
 -->
 <resources>
 
-  <!-- Device keyhandlers -->
-  <java-symbol type="array" name="config_deviceKeyHandlerLibs" />
-  <java-symbol type="array" name="config_deviceKeyHandlerClasses" />
+   <!-- Device keyhandlers -->
+   <java-symbol type="array" name="config_deviceKeyHandlerLibs" />
+   <java-symbol type="array" name="config_deviceKeyHandlerClasses" />
 
-  <!-- Proximity check on screen on -->
-  <java-symbol type="bool" name="config_proximityCheckOnWake" />
+   <!-- Proximity check on screen on -->
+   <java-symbol type="bool" name="config_proximityCheckOnWake" />
 
-  <!-- Proximity check timeout -->
-  <java-symbol type="integer" name="config_proximityCheckTimeout" />
+   <!-- Proximity check timeout -->
+   <java-symbol type="integer" name="config_proximityCheckTimeout" />
 
-  <!-- Proximity check on screen on default -->
-  <java-symbol type="bool" name="config_proximityCheckOnWakeEnabledByDefault" />
+   <!-- Proximity check on screen on default -->
+   <java-symbol type="bool" name="config_proximityCheckOnWakeEnabledByDefault" />
 
-  <!-- Power menu reboot -->
-  <java-symbol name="reboot_to_bootloader_title" type="string" />
-  <java-symbol name="reboot_to_bootloader_message" type="string" />
-  <java-symbol name="reboot_to_fastboot_title" type="string" />
-  <java-symbol name="reboot_to_fastboot_message" type="string" />
-  <java-symbol name="reboot_to_recovery_title" type="string" />
-  <java-symbol name="reboot_to_recovery_message" type="string" />
-  <java-symbol name="reboot_system_title" type="string" />
-  <java-symbol name="reboot_system_message" type="string" />
-  <java-symbol type="array" name="config_rebootActionsList" />
-  <java-symbol type="array" name="values_globalActionsList" />
+   <!-- Power menu reboot -->
+   <java-symbol name="reboot_to_bootloader_title" type="string" />
+   <java-symbol name="reboot_to_bootloader_message" type="string" />
+   <java-symbol name="reboot_to_fastboot_title" type="string" />
+   <java-symbol name="reboot_to_fastboot_message" type="string" />
+   <java-symbol name="reboot_to_recovery_title" type="string" />
+   <java-symbol name="reboot_to_recovery_message" type="string" />
+   <java-symbol name="reboot_system_title" type="string" />
+   <java-symbol name="reboot_system_message" type="string" />
+   <java-symbol type="array" name="config_rebootActionsList" />
+   <java-symbol type="array" name="values_globalActionsList" />
 
-  <!-- Package Manager -->
-  <java-symbol type="array" name="config_deviceDisabledComponents" />
-  <java-symbol type="array" name="config_globallyDisabledComponents" />
-  <java-symbol type="array" name="config_forceEnabledComponents" />
+   <!-- Package Manager -->
+   <java-symbol type="array" name="config_deviceDisabledComponents" />
+   <java-symbol type="array" name="config_globallyDisabledComponents" />
+   <java-symbol type="array" name="config_forceEnabledComponents" />
 
-  <!-- Vendor signatures -->
-  <java-symbol type="array" name="config_vendorPlatformSignatures" />
+   <!-- Vendor signatures -->
+   <java-symbol type="array" name="config_vendorPlatformSignatures" />
+
+   <!-- Sleep Mode -->
+   <java-symbol type="drawable" name="ic_sleep" />
+   <java-symbol type="string" name="notification_channel_sleep" />
+   <java-symbol type="string" name="sleep_mode_notification_title" />
+   <java-symbol type="string" name="sleep_mode_notification_content" />
+   <java-symbol type="string" name="sleep_mode_enabled_toast" />
+   <java-symbol type="string" name="sleep_mode_disabled_toast" />
 
 </resources>

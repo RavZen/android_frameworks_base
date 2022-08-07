@@ -59,6 +59,8 @@ public class SystemNotificationChannels {
     public static String DO_NOT_DISTURB = "DO_NOT_DISTURB";
     public static String ACCESSIBILITY_MAGNIFICATION = "ACCESSIBILITY_MAGNIFICATION";
     public static String ACCESSIBILITY_SECURITY_POLICY = "ACCESSIBILITY_SECURITY_POLICY";
+    public static String SLEEP = "SLEEP";
+
 
     public static void createAll(Context context) {
         final NotificationManager nm = context.getSystemService(NotificationManager.class);
@@ -164,6 +166,11 @@ public class SystemNotificationChannels {
                 context.getString(R.string.notification_channel_usb),
                 NotificationManager.IMPORTANCE_MIN);
         channelsList.add(usb);
+
+        channelsList.add(new NotificationChannel(
+        SLEEP,
+        context.getString(R.string.notification_channel_sleep),
+        NotificationManager.IMPORTANCE_LOW));
 
         NotificationChannel foregroundChannel = new NotificationChannel(
                 FOREGROUND_SERVICE,
