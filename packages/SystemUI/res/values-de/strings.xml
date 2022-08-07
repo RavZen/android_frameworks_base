@@ -886,4 +886,9 @@
 
        <!-- Sleep Mode -->
     <string name="quick_settings_sleep_mode_label">Schlafmodus</string>
+
+         <!-- Data usage info in QS footer -->
+    <string name="usage_data">Heute verbraucht</string>
+    <string name="usage_data_default_suffix">Mobile</string>
+    <string name="usage_wifi_default_suffix">Wi-Fi</string>
 </resources>
