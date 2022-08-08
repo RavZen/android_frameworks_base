@@ -5349,6 +5349,12 @@ public final class Settings {
         public static final String AMBIENT_BATTERY_PERCENT = "ambient_battery_percent";
 
         /**
+         * Whether to enable taskbar.
+         * @hide
+         */
+        public static final String ENABLE_TASKBAR = "enable_taskbar";
+
+        /**
          * These are all public system settings
          *
          * @hide
