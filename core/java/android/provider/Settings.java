@@ -5412,6 +5412,20 @@ public final class Settings {
         public static final String VIBRATE_ON_NOTIFICATIONS = "vibrate_on_notifications";
 
         /**
+         * whether to enable or disable vibration on succesful fingerprint auth
+         *
+         * @hide
+         */
+        public static final String FP_SUCCESS_VIBRATE = "fingerprint_success_vib";
+
+        /**
+         * whether to enable or disable vibration on failed fingerprint auth
+         *
+         * @hide
+         */
+        public static final String FP_ERROR_VIBRATE = "fingerprint_error_vib";
+
+        /**
          * These are all public system settings
          *
          * @hide
