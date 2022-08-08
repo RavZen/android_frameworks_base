@@ -520,6 +520,8 @@ public class NotificationManagerService extends SystemService {
     protected boolean mInCallStateOffHook = false;
     boolean mNotificationPulseEnabled;
 
+    private boolean mVibrateOnNotifications;
+
     private Uri mInCallNotificationUri;
     private AudioAttributes mInCallNotificationAudioAttributes;
     private float mInCallNotificationVolume;
@@ -1811,6 +1813,8 @@ public class NotificationManagerService extends SystemService {
                         Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS);
         private final Uri LOCK_SCREEN_SHOW_NOTIFICATIONS
                 = Settings.Secure.getUriFor(Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS);
+        private final Uri VIBRATE_ON_NOTIFICATIONS
+                = Settings.System.getUriFor(Settings.System.VIBRATE_ON_NOTIFICATIONS);
 
         SettingsObserver(Handler handler) {
             super(handler);
@@ -1834,6 +1838,8 @@ public class NotificationManagerService extends SystemService {
             resolver.registerContentObserver(LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(LOCK_SCREEN_SHOW_NOTIFICATIONS,
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(VIBRATE_ON_NOTIFICATIONS,
                     false, this, UserHandle.USER_ALL);
             update(null);
         }
@@ -1862,6 +1868,11 @@ public class NotificationManagerService extends SystemService {
             }
             if (uri == null || NOTIFICATION_BUBBLES_URI.equals(uri)) {
                 mPreferencesHelper.updateBubblesEnabled();
+            }
+            if (uri == null || VIBRATE_ON_NOTIFICATIONS.equals(uri)) {
+                mVibrateOnNotifications = Settings.System.getIntForUser(resolver,
+                        Settings.System.VIBRATE_ON_NOTIFICATIONS, 1,
+                        UserHandle.USER_CURRENT) == 1;
             }
             if (uri == null || NOTIFICATION_HISTORY_ENABLED.equals(uri)) {
                 final IntArray userIds = mUserProfiles.getCurrentProfileIds();
@@ -7342,7 +7353,10 @@ public class NotificationManagerService extends SystemService {
                     boolean insistent = (record.getFlags() & Notification.FLAG_INSISTENT) != 0;
                     vibration = mVibratorHelper.createFallbackVibration(insistent);
                 }
-                hasValidVibrate = vibration != null;
+                hasValidVibrate = vibration != null
+                        && (mVibrateOnNotifications
+                        || (mAudioManager.getRingerModeInternal()
+                        == AudioManager.RINGER_MODE_VIBRATE));
                 boolean hasAudibleAlert = hasValidSound || hasValidVibrate;
                 if (hasAudibleAlert && !shouldMuteNotificationLocked(record)) {
                     if (!sentAccessibilityEvent) {

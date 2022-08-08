@@ -86,5 +86,6 @@ public class SystemSettings {
         Settings.System.NOTIFICATION_LIGHT_PULSE,
         Settings.System.NAVIGATION_HANDLE_WIDTH,
         Settings.System.DOZE_ON_CHARGE,
+        Settings.System.VIBRATE_ON_NOTIFICATIONS,
     };
 }

@@ -5373,6 +5373,12 @@ public final class Settings {
         public static final String RETICKER_LANDSCAPE_ONLY = "reticker_landscape_only";
 
         /**
+         * Whether to vibrate on notifications
+         * @hide
+         */
+        public static final String VIBRATE_ON_NOTIFICATIONS = "vibrate_on_notifications";
+
+        /**
          * These are all public system settings
          *
          * @hide
@@ -5481,6 +5487,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(DISPLAY_COLOR_MODE_VENDOR_HINT);
             PRIVATE_SETTINGS.add(NAVIGATION_HANDLE_WIDTH);
             PRIVATE_SETTINGS.add(AMBIENT_BATTERY_PERCENT);
+            PRIVATE_SETTINGS.add(VIBRATE_ON_NOTIFICATIONS);
         }
 
         /**
