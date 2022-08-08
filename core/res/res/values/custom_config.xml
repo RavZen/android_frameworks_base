@@ -47,4 +47,6 @@
     <string-array name="config_vendorPlatformSignatures">
     </string-array>
 
+    <!-- Enable face auth only when swiping security view -->
+    <bool name="config_faceAuthOnlyOnSecurityView">false</bool>
 </resources>
