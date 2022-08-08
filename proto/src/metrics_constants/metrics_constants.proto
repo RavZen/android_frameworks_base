@@ -7429,6 +7429,9 @@ message MetricsEvent {
     // OS: Q - QPR1
     ACTION_ACTIVITY_CHOOSER_PICKED_SYSTEM_TARGET = 1749;
 
+    // Custom Metric
+    STATIX = 9999;
+
     // OPEN: Settings > System > Aware > Aware Display
     // OS: Q
     SETTINGS_AWARE_DISPLAY = 1750;
