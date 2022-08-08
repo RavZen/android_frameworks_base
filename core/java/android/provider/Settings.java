@@ -5426,6 +5426,15 @@ public final class Settings {
         public static final String FP_ERROR_VIBRATE = "fingerprint_error_vib";
 
         /**
+         * Whether allowing pocket service to register sensors and dispatch informations.
+         *   0 = disabled
+         *   1 = enabled
+         * @author Carlo Savignano
+         * @hide
+         */
+        public static final String POCKET_JUDGE = "pocket_judge";
+
+        /**
          * These are all public system settings
          *
          * @hide
@@ -5538,6 +5547,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_ENABLED);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_AUTO_HIDE_THRESHOLD_TX);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_AUTO_HIDE_THRESHOLD_RX);
+            PRIVATE_SETTINGS.add(POCKET_JUDGE);
         }
 
         /**
