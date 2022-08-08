@@ -5367,6 +5367,12 @@ public final class Settings {
         public static final String RETICKER_COLORED = "reticker_colored";
 
         /**
+         * Only enable reTicker in landscape mode
+         * @hide
+         */
+        public static final String RETICKER_LANDSCAPE_ONLY = "reticker_landscape_only";
+
+        /**
          * These are all public system settings
          *
          * @hide
