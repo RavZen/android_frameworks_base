@@ -28,4 +28,6 @@
     <dimen name="status_bar_mobile_type_padding">3dp</dimen>
     <dimen name="status_bar_mobile_type_padding_limit">10dp</dimen>
 
+    <color name="reticker_background_color">@android:color/system_neutral1_50</color>
+
 </resources>
