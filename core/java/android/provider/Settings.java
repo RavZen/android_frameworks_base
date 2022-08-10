@@ -5282,6 +5282,18 @@ public final class Settings {
         public static final String USE_OLD_MOBILETYPE = "use_old_mobiletype";  
 
         /**
+         * Whether to enable DOZE only when charging
+         * @hide
+         */
+        public static final String DOZE_ON_CHARGE = "doze_on_charge";
+
+        /**
+         * Hidden setting of the current atate of DOZE only when charging
+         * @hide
+         */
+        public static final String DOZE_ON_CHARGE_NOW = "doze_on_charge_now";
+
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate

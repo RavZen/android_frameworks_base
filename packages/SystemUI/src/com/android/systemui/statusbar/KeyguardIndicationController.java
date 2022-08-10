@@ -59,6 +59,7 @@ import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.provider.Settings;
 
 import androidx.annotation.Nullable;
 
@@ -735,6 +736,7 @@ public class KeyguardIndicationController {
         mTopIndicationView.setText(null);
         mLockScreenIndicationView.setVisibility(View.VISIBLE);
         updatePersistentIndications(animate, KeyguardUpdateMonitor.getCurrentUser());
+        }
     }
 
     // animates textView - textView moves up and bounces down
@@ -764,6 +766,7 @@ public class KeyguardIndicationController {
                         textView.setTranslationY(BOUNCE_ANIMATION_FINAL_Y);
                         mCancelled = true;
                     }
+
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
