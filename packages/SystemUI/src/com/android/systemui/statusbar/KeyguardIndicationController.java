@@ -681,9 +681,9 @@ public class KeyguardIndicationController {
     }
 
     protected final void updateIndication(boolean animate) {
-        if (!mVisible) {
-            return;
-        }
+        if (mVisible) {
+            boolean showAmbientBattery = Settings.System.getIntForUser(mContext.getContentResolver(),
+                     Settings.System.AMBIENT_BATTERY_PERCENT, 1, UserHandle.USER_CURRENT) == 1;
 
         // A few places might need to hide the indication, so always start by making it visible
         mIndicationArea.setVisibility(VISIBLE);
@@ -719,8 +719,15 @@ public class KeyguardIndicationController {
                     mTopIndicationView.switchIndication(indication, null, true /* animate */,
                             () -> mWakeLock.setAcquired(false));
                 } else {
-                    mTopIndicationView.switchIndication(indication, null, false /* animate */,
-                            null /* onAnimationEndCallback */);
+                    if (showAmbientBattery) {
+                        String percentage = NumberFormat.getPercentInstance()
+                                .format(mBatteryLevel / 100f);
+                        mTopIndicationView.switchIndication(percentage, null /* indication */,
+                                false /* animate */, null /* onAnimationEnd*/);
+                    } else {
+                        mTopIndicationView.switchIndication(null, null /* indication */,
+                                false /* animate */, null /* onAnimationEnd*/);
+                    }
                 }
             } else {
                 String percentage = NumberFormat.getPercentInstance()
@@ -728,7 +735,7 @@ public class KeyguardIndicationController {
                 mTopIndicationView.switchIndication(percentage, null /* indication */,
                         false /* animate */, null /* onAnimationEnd*/);
             }
-            return;
+            updatePersistentIndications(animate, KeyguardUpdateMonitor.getCurrentUser());
         }
 
         // LOCK SCREEN
