@@ -521,6 +521,7 @@ public class StatusBar extends SystemUI implements
     private final StatusBarIconController mStatusBarIconController;
     private final StatusBarHideIconsForBouncerManager mStatusBarHideIconsForBouncerManager;
 
+    protected TaskHelper mTaskHelper;
     // expanded notifications
     // the sliding/resizing panel within the notification window
     protected NotificationPanelViewController mNotificationPanelViewController;
@@ -800,7 +801,8 @@ public class StatusBar extends SystemUI implements
             Optional<StartingSurface> startingSurfaceOptional,
             TunerService tunerService,
             DumpManager dumpManager,
-            ActivityLaunchAnimator activityLaunchAnimator) {
+            ActivityLaunchAnimator activityLaunchAnimator,
+            TaskHelper taskHelper) {
         super(context);
         mNotificationsController = notificationsController;
         mFragmentService = fragmentService;
@@ -902,6 +904,7 @@ public class StatusBar extends SystemUI implements
         lockscreenShadeTransitionController.setStatusbar(this);
 
         mPanelExpansionStateManager.addExpansionListener(this::onPanelExpansionChanged);
+        mTaskHelper = taskHelper;
 
         mBubbleExpandListener =
                 (isExpanding, key) -> mContext.getMainExecutor().execute(() -> {
