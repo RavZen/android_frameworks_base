@@ -77,6 +77,12 @@ public class PixelPropsUtils {
         if (packageName == null){
             return;
         }
+
+        if (packageName.equals("com.google.android.apps.photos")) {
+            if (!SystemProperties.getBoolean("persist.sys.pixelprops.gphotos", true))
+                return;
+        }
+
         if (Arrays.asList(pixelCodenames).contains(SystemProperties.get(DEVICE))) {
             if (packageName.equals(PACKAGE_GMS) && app.getProcessName().equals("com.google.android.gms.unstable")) {
                 setPropValue("MODEL", SystemProperties.get("ro.product.model") + " ");
