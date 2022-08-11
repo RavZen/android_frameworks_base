@@ -5420,7 +5420,12 @@ public final class Settings {
         public static final String POCKET_JUDGE = "pocket_judge";
 
         /**
-         * Whether to wake the display when plugging or unplugging the charger
+         * Enable and disable Artwork on background media notification
+         * @hide
+         */
+        public static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
+
+        /**
          *
          * @hide
          */
@@ -5541,6 +5546,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_AUTO_HIDE_THRESHOLD_TX);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_AUTO_HIDE_THRESHOLD_RX);
             PRIVATE_SETTINGS.add(POCKET_JUDGE);
+            PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_GESTURE);
         }
 
         /**
