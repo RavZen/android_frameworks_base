@@ -92,5 +92,8 @@ public class SystemSettings {
         Settings.System.INCREASING_RING,
         Settings.System.INCREASING_RING_START_VOLUME,
         Settings.System.INCREASING_RING_RAMP_UP_TIME,
+        Settings.System.VIBRATE_ON_CONNECT,
+        Settings.System.VIBRATE_ON_CALLWAITING,
+        Settings.System.VIBRATE_ON_DISCONNECT,
     };
 }
