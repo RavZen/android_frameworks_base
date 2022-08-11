@@ -74,6 +74,7 @@ public class BatteryMeterViewControllerTest extends SysuiTestCase {
         mController = new BatteryMeterViewController(
                 mBatteryMeterView,
                 mConfigurationController,
+                mTunerService,
                 mBroadcastDispatcher,
                 mHandler,
                 mContentResolver,
