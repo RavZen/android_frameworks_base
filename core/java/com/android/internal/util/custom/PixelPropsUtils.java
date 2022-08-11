@@ -44,7 +44,10 @@ public class PixelPropsUtils {
 
     private static final String[] packagesToKeep = {
         "com.google.android.GoogleCamera",
-        "com.google.android.GoogleCamera.Go",
+            "com.google.android.MTCL83", "com.google.android.UltraCVM", "com.google.android.apps.cameralite",
+            "com.google.android.apps.wearables.maestro.companion", "com.google.android.dialer",
+            "com.google.ar.core", "com.google.android.apps.recorder", "com.google.android.youtube",
+            "com.google.android.apps.youtube"
     };
 
     // Codenames for currently supported Pixels by Google
