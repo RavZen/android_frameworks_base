@@ -33,19 +33,16 @@ public class PixelPropsUtils {
 
     private static volatile boolean sIsGms = false;
     public static final String PACKAGE_GMS = "com.google.android.gms";
+    public static final String PACKAGE_ANDROID = "com.google.android";
+    public static final String PACKAGE_LATIN = "com.google.android.inputmethod.latin";
     private static final String DEVICE = "ro.statix.device";
 
     private static final Map<String, Object> propsToChange;
     private static final Map<String, ArrayList<String>> propsToKeep;
-    private static final Map<String, Object> propsToChangePixel6;
     private static final String[] extraPackagesToChange = {
         "com.android.vending",
         "com.breel.wallpapers20"
     };
-
-    private static final String[] packagesToChangePixel6 = { PACKAGE_GMS,
-            "com.google.android", "com.samsung.accessory", "com.samsung.android", "com.android.vending", "com.google.android.inputmethod.latin", };
-
 
     private static final String[] packagesToKeep = {
         "com.google.android.GoogleCamera",
@@ -78,14 +75,6 @@ public class PixelPropsUtils {
         propsToChange.put("PRODUCT", "redfin");
         propsToChange.put("MODEL", "Pixel 5");
         propsToChange.put("FINGERPRINT", "google/redfin/redfin:12/SQ3A.220705.003.A1/8672226:user/release-keys");
-        propsToChangePixel6 = new HashMap<>();
-        propsToChangePixel6.put("BRAND", "google");
-        propsToChangePixel6.put("MANUFACTURER", "Google");
-        propsToChangePixel6.put("DEVICE", "raven");
-        propsToChangePixel6.put("PRODUCT", "raven");
-        propsToChangePixel6.put("MODEL", "Pixel 6 Pro");
-        propsToChangePixel6.put(
-                "FINGERPRINT", "google/raven/raven:12/SQ3A.220705.003/8671607:user/release-keys");
     }
 
     public static void setProps(Application app) {
@@ -100,7 +89,7 @@ public class PixelPropsUtils {
         }
 
         if (Arrays.asList(pixelCodenames).contains(SystemProperties.get(DEVICE))) {
-            if (packageName.equals(PACKAGE_GMS) && app.getProcessName().equals("com.google.android.gms.unstable")) {
+            if ((packageName.equals(PACKAGE_GMS) || packageName.equals(PACKAGE_ANDROID) || packageName.equals(PACKAGE_LATIN))  && app.getProcessName().equals("com.google.android.gms.unstable")) {
                 setPropValue("MODEL", SystemProperties.get("ro.product.model") + " ");
                 setPropValue("PRODUCT", SystemProperties.get(DEVICE));
                 sIsGms = true;
@@ -110,9 +99,6 @@ public class PixelPropsUtils {
         if (packageName.equals(PACKAGE_GMS) && app.getProcessName().equals("com.google.android.gms.unstable")) {
             setPropValue("MODEL", "Pixel 5" + " ");
             sIsGms = true;
-        }
-        if (contains(packageName, packagesToChangePixel6)) {
-            propsToChange.putAll(propsToChangePixel6);
         }
         if ((packageName.startsWith("com.google.") && !Arrays.asList(packagesToKeep).contains(packageName))
                 || Arrays.asList(extraPackagesToChange).contains(packageName)){
