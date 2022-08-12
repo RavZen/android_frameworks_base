@@ -30,7 +30,7 @@ import android.net.Uri;
 import android.widget.Toast;
 
 import com.android.systemui.dagger.qualifiers.Background;
-import com.android.internal.util.derp.derpUtils;
+import com.android.internal.util.custom.CustomUtils;
 
 import java.util.concurrent.Executor;
 
@@ -50,7 +50,7 @@ public class LensScreenshotReceiver extends BroadcastReceiver {
     }
 
     private boolean doesGoogleLensExist(Context context) {
-        return derpUtils.isPackageInstalled(context, ARPackageName);
+        return CustomUtils.isPackageInstalled(context, ARPackageName);
     }
 
     @Override

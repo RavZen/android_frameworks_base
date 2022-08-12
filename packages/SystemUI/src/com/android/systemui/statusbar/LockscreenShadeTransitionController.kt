@@ -14,7 +14,7 @@ import android.view.View
 import android.view.ViewConfiguration
 import androidx.annotation.VisibleForTesting
 import com.android.systemui.Dumpable
-import com.android.internal.util.derp.derpUtils
+import com.android.internal.util.custom.CustomUtils
 import com.android.systemui.ExpandHelper
 import com.android.systemui.Gefingerpoken
 import com.android.systemui.R
@@ -684,7 +684,7 @@ class DragDownHelper(
         statusBarHeaderHeight = context
                 .resources.getDimensionPixelSize(R.dimen.status_bar_header_height_keyguard)
         goToSleep = Runnable {
-            derpUtils.switchScreenOff(context)
+            CustomUtils.switchScreenOff(context)
         }
     }
 

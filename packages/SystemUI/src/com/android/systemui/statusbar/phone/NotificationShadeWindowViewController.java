@@ -528,10 +528,12 @@ public class NotificationShadeWindowViewController {
     }
 
     public void setLockscreenDoubleTapToSleep() {
+        boolean isDoubleTapLockscreenEnabled = Settings.System.getIntForUser(mView.getContext().getContentResolver(),
+                Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN, 1, UserHandle.USER_CURRENT) == 1;
         boolean doubleTapToSleepEnabled = Settings.System.getIntForUser(mView.getContext().getContentResolver(),
                 Settings.System.DOUBLE_TAP_SLEEP_GESTURE, 1, UserHandle.USER_CURRENT) == 1;
         if (mNotificationPanelViewController != null) {
-            mNotificationPanelViewController.setDoubleTapToSleep(doubleTapToSleepEnabled);
+            mNotificationPanelViewController.setLockscreenDoubleTapToSleep(isDoubleTapLockscreenEnabled);
         }
         if (mDragDownHelper != null) {
             mDragDownHelper.setDoubleTapToSleep(doubleTapToSleepEnabled);
