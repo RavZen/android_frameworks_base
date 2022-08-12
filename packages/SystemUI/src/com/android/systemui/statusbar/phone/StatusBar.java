@@ -3912,6 +3912,9 @@ public class StatusBar extends SystemUI implements
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_FOOTER_WARNINGS),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -3923,11 +3926,15 @@ public class StatusBar extends SystemUI implements
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN))) {
                 setLockscreenDoubleTapToSleep();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.QS_FOOTER_WARNINGS))) {
+                setQsPanelOptions();
             }
         }
 
         public void update() {
             setLockscreenDoubleTapToSleep();
+            setQsPanelOptions();
     }
 
     private void setLockscreenDoubleTapToSleep() {
@@ -3935,6 +3942,12 @@ public class StatusBar extends SystemUI implements
             mNotificationShadeWindowViewController.setLockscreenDoubleTapToSleep();
         }
 
+    }
+
+    private void setQsPanelOptions() {
+        if (mQSPanelController != null) {
+            mQSPanelController.updateSettings();
+        }
     }
 
     private final BroadcastReceiver mBannerActionBroadcastReceiver = new BroadcastReceiver() {
