@@ -34,4 +34,7 @@
     <!-- Burn-in protection -->
     <dimen name="horizontal_max_shift">3.0dp</dimen>
     <dimen name="vertical_max_shift">1.0dp</dimen>
+
+    <dimen name="ongoing_appops_chip_main_padding">10dp</dimen>
+    <dimen name="ongoing_appops_chip_2_width">56dp</dimen>
 </resources>
