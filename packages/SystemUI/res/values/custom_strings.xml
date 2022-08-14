@@ -22,9 +22,6 @@
      <string name="global_action_reboot_fastboot">Fastboot</string>
      <string name="global_action_settings">Settings</string>
 
-     <!-- Title of statusbar tuner -->
-     <string name="status_bar_icons">Status bar icons</string>
-
      <!-- Sleep Mode -->
      <string name="quick_settings_sleep_mode_label">Sleep Mode</string>
 
