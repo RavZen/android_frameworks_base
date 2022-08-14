@@ -173,7 +173,7 @@ public class NotificationIconAreaController implements
                 break;
             case STATUSBAR_COLORED_ICONS:
                 boolean newIconStyle =
-                    TunerService.parseIntegerSwitch(newValue, false);
+                    TunerService.parseIntegerSwitch(newValue, true);
                 if (mNewIconStyle != newIconStyle) {
                     mNewIconStyle = newIconStyle;
                     updateNotificationIcons();
