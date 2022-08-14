@@ -43,12 +43,15 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
+import android.os.UserHandle;
+import android.os.Vibrator;
+import android.provider.Settings;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
-
+import android.provider.Settings;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.jank.InteractionJankMonitor;
 import com.android.internal.logging.InstanceId;
@@ -120,6 +123,8 @@ public abstract class QSTileImpl<TState extends State> implements QSTile, Lifecy
     private boolean mShowingDetail;
     private int mIsFullQs;
 
+    protected Vibrator mVibrator;
+
     private final LifecycleRegistry mLifecycle = new LifecycleRegistry(this);
 
     /**
@@ -190,6 +195,8 @@ public abstract class QSTileImpl<TState extends State> implements QSTile, Lifecy
         mMetricsLogger = metricsLogger;
         mStatusBarStateController = statusBarStateController;
         mActivityStarter = activityStarter;
+
+        mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
 
         resetStates();
         mUiHandler.post(() -> mLifecycle.setCurrentState(CREATED));
@@ -273,6 +280,25 @@ public abstract class QSTileImpl<TState extends State> implements QSTile, Lifecy
 
     // safe to call from any thread
 
+    public boolean isVibrationEnabled() {
+        return (Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.QUICK_SETTINGS_TILES_VIBRATE, 0,
+                UserHandle.USER_CURRENT) == 1);
+    }
+
+    public int getVibrationDuration() {
+        return Settings.Secure.getIntForUser(mContext.getContentResolver(),
+               Settings.Secure.QUICK_SETTINGS_TILES_VIBRATE_DURATION, 45,
+               UserHandle.USER_CURRENT);
+    }
+
+    public void vibrateTile() {
+        if (!isVibrationEnabled()) { return; }
+        if (mVibrator != null) {
+            if (mVibrator.hasVibrator()) { mVibrator.vibrate(getVibrationDuration()); }
+        }
+    }
+
     public void addCallback(Callback callback) {
         mHandler.obtainMessage(H.ADD_CALLBACK, callback).sendToTarget();
     }
@@ -295,6 +321,7 @@ public abstract class QSTileImpl<TState extends State> implements QSTile, Lifecy
         if (!mFalsingManager.isFalseTap(FalsingManager.LOW_PENALTY)) {
             mHandler.obtainMessage(H.CLICK, view).sendToTarget();
         }
+        vibrateTile();
     }
 
     public void secondaryClick(@Nullable View view) {
@@ -317,6 +344,7 @@ public abstract class QSTileImpl<TState extends State> implements QSTile, Lifecy
                 getInstanceId());
         mQSLogger.logTileLongClick(mTileSpec, mStatusBarStateController.getState(), mState.state);
         mHandler.obtainMessage(H.LONG_CLICK, view).sendToTarget();
+        vibrateTile();
     }
 
     public LogMaker populate(LogMaker logMaker) {

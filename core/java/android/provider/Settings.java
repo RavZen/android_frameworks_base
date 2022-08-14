@@ -10518,6 +10518,23 @@ public final class Settings {
         public static final String AMBIENT_PULSE_ENABLED = "ambient_pulse_enabled";
 
         /**
+         * Change quick settings tiles vibration duration (in milliseconds)
+         *
+         * @hide
+         */
+        public static final String QUICK_SETTINGS_TILES_VIBRATE =
+                "quick_settings_vibrate";
+
+        /**
+         * Change quick settings tiles vibration duration (in milliseconds)
+         *
+         * @hide
+         */
+        public static final String QUICK_SETTINGS_TILES_VIBRATE_DURATION =
+                "quick_settings_vibrate_duration";
+
+        /**
+         *
          * Pulse lockscreen music visualizer
          * @hide
          */
