@@ -186,8 +186,7 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
         // Tint for the battery icons are handled in setupHost()
         mBatteryRemainingIcon = findViewById(R.id.batteryRemainingIcon);
         mBatteryRemainingIcon.setOnClickListener(this);
-
-        mNetworkTraffic = findViewById(R.id.networkTraffic);
+        mBatteryRemainingIcon.mQS = true;
 
         Configuration config = mContext.getResources().getConfiguration();
         setDatePrivacyContainersWidth(config.orientation == Configuration.ORIENTATION_LANDSCAPE);
@@ -394,7 +393,6 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
             }
             mBatteryRemainingIcon.updateColors(mTextColorPrimary, textColorSecondary,
                     mTextColorPrimary);
-            mNetworkTraffic.setTintColor(textColor);
         }
 
         MarginLayoutParams qqsLP = (MarginLayoutParams) mHeaderQsPanel.getLayoutParams();
@@ -732,7 +730,5 @@ public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tu
             default:
                 break;
         }
-        mClockView.setClockVisibleByUser(!StatusBarIconController.getIconHideList(
-                mContext, newValue).contains("clock"));
     }
 }

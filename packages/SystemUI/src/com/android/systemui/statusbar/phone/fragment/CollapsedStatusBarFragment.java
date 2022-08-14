@@ -221,6 +221,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         updateBlockedIcons();
         mStatusBarIconController.addIconGroup(mDarkIconManager);
         mSystemIconArea = mStatusBar.findViewById(R.id.system_icon_area);
+        mClockView = mStatusBar.findViewById(R.id.clock);
         mSignalClusterEndPadding = getResources().getDimensionPixelSize(R.dimen.signal_cluster_battery_padding);
         mStatusIcons = mStatusBar.findViewById(R.id.statusIcons);
         int batteryStyle = Settings.System.getInt(getContext().getContentResolver(),
@@ -547,6 +548,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     /**
      * Shows a view, and synchronizes the animation with Keyguard exit animations, if applicable.
      */
+
     private void animateShow(View v, boolean animate) {
         v.animate().cancel();
         v.setVisibility(View.VISIBLE);
