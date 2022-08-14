@@ -699,6 +699,9 @@ public class KeyguardIndicationController {
             boolean showBatteryBarAlways = Settings.System.getIntForUser(mContext.getContentResolver(),
                      Settings.System.OMNI_KEYGUARD_SHOW_BATTERY_BAR_ALWAYS, 0, UserHandle.USER_CURRENT) == 1;
 
+            // A few places might need to hide the indication, so always start by making it visible
+            mIndicationArea.setVisibility(VISIBLE);
+
             // Walk down a precedence-ordered list of what indication
             // should be shown based on user or device state
             // AoD
@@ -741,10 +744,15 @@ public class KeyguardIndicationController {
                         mBatteryBar.setBarColor(Color.WHITE);
                     }
                 } else {
-                    String percentage = NumberFormat.getPercentInstance()
-                            .format(mBatteryLevel / 100f);
-                    mTopIndicationView.switchIndication(percentage, null /* indication */,
-                            false /* animate */, null /* onAnimationEnd*/);
+                    if (showAmbientBattery) {
+                        String percentage = NumberFormat.getPercentInstance()
+                                .format(mBatteryLevel / 100f);
+                        mTopIndicationView.switchIndication(percentage, null /* indication */,
+                                false /* animate */, null /* onAnimationEnd*/);
+                    } else {
+                        mTopIndicationView.switchIndication(null, null /* indication */,
+                                false /* animate */, null /* onAnimationEnd*/);
+                    }
                     if (showBatteryBarAlways) {
                         mBatteryBar.setVisibility(View.VISIBLE);
                         mBatteryBar.setBatteryPercent(mBatteryLevel);
@@ -761,7 +769,7 @@ public class KeyguardIndicationController {
             mTopIndicationView.setVisibility(GONE);
             mTopIndicationView.setText(null);
             mLockScreenIndicationView.setVisibility(View.VISIBLE);
-            updateIndications(animate, KeyguardUpdateMonitor.getCurrentUser());
+            updatePersistentIndications(animate, KeyguardUpdateMonitor.getCurrentUser());
         }
     }
 
