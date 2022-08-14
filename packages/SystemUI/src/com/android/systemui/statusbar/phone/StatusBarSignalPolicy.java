@@ -143,9 +143,13 @@ public class StatusBarSignalPolicy implements SignalCallback,
         boolean vpnVisible = mSecurityController.isVpnEnabled() && !mHideVpn;
         int vpnIconId = currentVpnIconId(mSecurityController.isVpnBranded());
 
-        mIconController.setIcon(mSlotVpn, vpnIconId,
+        if (vpnVisible && vpnIconId > 0) {
+            mIconController.setIcon(mSlotVpn, vpnIconId,
                 mContext.getResources().getString(R.string.accessibility_vpn_on));
-        mIconController.setIconVisibility(mSlotVpn, vpnVisible);
+            mIconController.setIconVisibility(mSlotVpn, true);
+        } else {
+            mIconController.setIconVisibility(mSlotVpn, false);
+        }
     }
 
     private int currentVpnIconId(boolean isBranded) {
