@@ -78,14 +78,14 @@ public class CustomUtils {
 
     public static void showSystemUiRestartDialog(Context context) {
         new AlertDialog.Builder(context)
-                .setTitle('Restart System UI')
-                .setMessage('Restarts the system ui')
-                .setPositiveButton('Ok', new DialogInterface.OnClickListener() {
+                .setTitle("Restart System UI")
+                .setMessage("Restarts the system ui")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         restartSystemUi(context);
                     }
                 })
-                .setNegativeButton('Cancel', null)
+                .setNegativeButton("Cancel", null)
                 .show();
     }
 
