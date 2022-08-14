@@ -29,8 +29,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:paddingStart="@dimen/clock_padding_start" >
+        android:paddingStart="@dimen/clock_padding_start"
+        android:paddingTop="48dp"
+        android:layout_alignParentTop="true" >
         <com.android.keyguard.AnimatableClockView
             android:id="@+id/animatable_clock_view"
             android:layout_width="wrap_content"
@@ -43,8 +44,8 @@
             android:singleLine="true"
             android:fontFeatureSettings="pnum"
             chargeAnimationDelay="350"
-            dozeWeight="250"
-            lockScreenWeight="400"
+            dozeWeight="350"
+            lockScreenWeight="450"
         />
     </FrameLayout>
     <FrameLayout
@@ -64,7 +65,7 @@
             android:fontFamily="@font/clock"
             android:typeface="monospace"
             android:elegantTextHeight="false"
-            android:paddingBottom="78dp"
+            android:paddingBottom="24dp"
             chargeAnimationDelay="200"
             dozeWeight="380"
             lockScreenWeight="500"
