@@ -2,7 +2,7 @@
 <com.android.keyguard.clock.ClockLayout xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:aapt="http://schemas.android.com/aapt" android:layout_gravity="top|center_vertical|center_horizontal|center" android:layout_width="match_parent" android:layout_height="match_parent">
+    xmlns:aapt="http://schemas.android.com/aapt" android:layout_gravity="top|center_vertical|center_horizontal|center" android:layout_width="match_parent" android:layout_height="match_parent" android:paddingTop="-24dp">
 
     <LinearLayout android:orientation="vertical" android:id="@+id/clock_view" android:layout_width="match_parent" android:layout_height="wrap_content">
 
