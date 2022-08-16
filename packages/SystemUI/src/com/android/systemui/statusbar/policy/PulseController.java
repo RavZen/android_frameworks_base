@@ -35,6 +35,5 @@ public interface PulseController extends NotificationMediaManager.MediaListener 
     public void setDozing(boolean dozing);
     public void notifyKeyguardGoingAway();
     public void setKeyguardShowing(boolean showing);
-    public void setQSShowing(boolean showing);
     public void onStartedGoingToSleep();
 }
