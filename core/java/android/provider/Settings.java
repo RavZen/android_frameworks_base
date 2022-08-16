@@ -5288,13 +5288,7 @@ public final class Settings {
         public static final String GLOBAL_ACTIONS_LIST = "global_actions_list";
 
         /**
-         * and we do a wake gesture like lift to wake or double tap
-         *
-         * @hide
-         */
-        public static final String AMBIENT_WAKE_GESTURES = "ambient_wake_gestures";
-
-        /**
+         * Battery style
          * @hide
          */
         public static final String USE_OLD_MOBILETYPE = "use_old_mobiletype";  
