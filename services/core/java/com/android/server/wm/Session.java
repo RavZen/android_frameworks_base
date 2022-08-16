@@ -522,8 +522,8 @@ class Session extends IWindowSession.Stub implements IBinder.DeathRecipient {
         synchronized (mService.mGlobalLock) {
             final long ident = Binder.clearCallingIdentity();
             try {
-                actionOnWallpaper(window, (wpController, windowState) ->
-                        wpController.setWallpaperZoomOut(windowState, zoom));
+                // actionOnWallpaper(window, (wpController, windowState) ->
+                //         wpController.setWallpaperZoomOut(windowState, zoom));
             } finally {
                 Binder.restoreCallingIdentity(ident);
             }
