@@ -3943,7 +3943,8 @@ public class StatusBar extends SystemUI implements
             setLockscreenDoubleTapToSleep();
             setQsPanelOptions();
             setLockScreenMediaBlurLevel();            
-            setLockScreenMediaArt();         
+            setLockScreenMediaArt();
+        }    
     }
 
     private void setLockscreenDoubleTapToSleep() {

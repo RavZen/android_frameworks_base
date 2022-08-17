@@ -44,6 +44,7 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.os.UserHandle;
 
 import com.android.internal.statusbar.NotificationVisibility;
 import com.android.systemui.Dependency;
