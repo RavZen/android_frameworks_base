@@ -220,5 +220,6 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.VIBRATE_ON_DISCONNECT, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.RINGTONE_VIBRATION_PATTERN, new InclusiveIntegerRangeValidator(0, 4));
         VALIDATORS.put(System.LOCKSCREEN_BATTERY_INFO, BOOLEAN_VALIDATOR);
+        VALIDATORS.put(System.LOCKSCREEN_MEDIA_BLUR, ANY_INTEGER_VALIDATOR);
     }
 }

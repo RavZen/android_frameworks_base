@@ -97,5 +97,6 @@ public class SystemSettings {
         Settings.System.VIBRATE_ON_DISCONNECT,
         Settings.System.RINGTONE_VIBRATION_PATTERN,
         Settings.System.LOCKSCREEN_BATTERY_INFO,
+        Settings.System.LOCKSCREEN_MEDIA_BLUR,
     };
 }
