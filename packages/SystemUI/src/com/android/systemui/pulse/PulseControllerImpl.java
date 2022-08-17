@@ -373,7 +373,7 @@ public class PulseControllerImpl
         }
         mRenderer = getRenderer();
         mColorController.setRenderer(mRenderer);
-        mRenderer.setLeftInLandscape(mLeftInLandscape);
+        mRenderer.setLeftInLandscape(false);
         if (isRendering) {
             mRenderer.onStreamAnalyzed(true);
             mStreamHandler.resume();
