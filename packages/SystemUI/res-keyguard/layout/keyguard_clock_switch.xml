@@ -30,7 +30,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:paddingStart="@dimen/clock_padding_start"
-        android:paddingTop="48dp"
         android:layout_alignParentTop="true" >
         <com.android.keyguard.AnimatableClockView
             android:id="@+id/animatable_clock_view"
@@ -65,9 +64,8 @@
             android:fontFamily="@font/clock"
             android:typeface="monospace"
             android:elegantTextHeight="false"
-            android:paddingBottom="24dp"
             chargeAnimationDelay="200"
-            dozeWeight="380"
+            dozeWeight="450"
             lockScreenWeight="500"
         />
     </FrameLayout>

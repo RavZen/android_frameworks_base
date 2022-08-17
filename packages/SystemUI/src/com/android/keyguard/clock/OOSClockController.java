@@ -121,7 +121,7 @@ public class OOSClockController implements ClockPlugin {
 
 
     public int getPreferredY(int totalHeight) {
-        return totalHeight;
+        return totalHeight / 12;
     }
 
 
