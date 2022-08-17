@@ -98,5 +98,6 @@ public class SystemSettings {
         Settings.System.RINGTONE_VIBRATION_PATTERN,
         Settings.System.LOCKSCREEN_BATTERY_INFO,
         Settings.System.LOCKSCREEN_MEDIA_BLUR,
+        Settings.System.SHOW_LOCKSCREEN_MEDIA_ART,
     };
 }
