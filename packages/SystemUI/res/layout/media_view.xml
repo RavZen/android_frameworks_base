@@ -129,6 +129,7 @@
         android:layout_height="48dp"
         android:orientation="horizontal"
         android:gravity="top|end"
+        android:paddingBottom="4dp"
         android:paddingTop="@dimen/qs_media_padding"
         android:paddingEnd="@dimen/qs_media_padding"
         android:background="@drawable/qs_media_light_source"
