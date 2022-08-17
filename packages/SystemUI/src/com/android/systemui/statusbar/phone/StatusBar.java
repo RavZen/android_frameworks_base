@@ -3910,6 +3910,9 @@ public class StatusBar extends SystemUI implements
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_FOOTER_WARNINGS),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_MEDIA_BLUR),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -3924,12 +3927,16 @@ public class StatusBar extends SystemUI implements
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.QS_FOOTER_WARNINGS))) {
                 setQsPanelOptions();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_MEDIA_BLUR))) {
+                setLockScreenMediaBlurLevel();
             }
         }
 
         public void update() {
             setLockscreenDoubleTapToSleep();
             setQsPanelOptions();
+            setLockScreenMediaBlurLevel();            
     }
 
     private void setLockscreenDoubleTapToSleep() {
@@ -3942,6 +3949,12 @@ public class StatusBar extends SystemUI implements
     private void setQsPanelOptions() {
         if (mQSPanelController != null) {
             mQSPanelController.updateSettings();
+        }
+    }
+
+    private void setLockScreenMediaBlurLevel() {
+        if (mMediaManager != null) {
+            mMediaManager.setLockScreenMediaBlurLevel();
         }
     }
 
